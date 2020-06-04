@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>The Typology Of The Google Mobility Reports (COVID-19)</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">The Typology Of The Google Mobility Reports (COVID-19)</h1>
+
+
+
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(regions)</a></code></pre></div>
+<p>Google is not using those sub-national divisions (region), that the EU or OECD is using for statistical purposes. This means that any comparison of Google’s Mobility Reports with population, transport, public health, or economic variable requires a sub-national division vocabulary for translation, or in the EU parlance a <em>correspondence table</em>.</p>
+<p>Google appears to be using, at least in most of the cases, the <code>ISO-3166-2</code> sub-national divisions from the <em>ISO 3166 Codes for the representation of names of countries and their subdivisions</em> with non-standard naming (labels). When we want to analyze the Google Mobility Report together with national statistics, this causes several problems:</p>
+<ul>
+<li><p><code>ISO-3166-2</code> is not a hierarchical typology, while Europe’s statistical typologies, the <code>NUTS1</code>-<code>NUTS2</code>-<code>NUTS3</code> are hierarchical, so we had to create many hundred lines of <code>R</code> code to create the necessary descriptive metadata for joining the <code>ISO</code>-like Google and the <code>NUTS</code> typologies of Europe.</p></li>
+<li><p>The <code>ISO-3166-2</code> is changing very fast, within Europe there are many changes every year; however, these changes are not so easy to trace as the changes within the European statistical nomenclature (NUTS). We are unsure how Google handles changes in <code>ISO-3166-2</code> over the coverage of the Mobility Reports.</p></li>
+<li><p>Google is not using either the machine-readable, alphanumeric <code>ISO-3166-2</code> codes or the official (Latin) labels, instead it uses a quasi-English unofficial labelling, which requires manual identification of Google’s typology items.</p></li>
+</ul>
+<p>A bit exotic example, Réunion, or, as France calls it, <em>La Réunion</em>, shows some of the statistical impracticalities of the non-hierarchical <code>ISO-3166</code> codes. Google used the <a href="https://www.iso.org/obp/ui/#iso:code:3166:RE">RE</a> <code>ISO-3166-1</code> country code and the corresponding label Réunion to identify the small island in the Indian ocean. However, as a part of France (and the European Union), it is also described in France’s <code>ISO-3166-2</code> as <code>FR-LRE</code>, labelled <em>La Réunion</em> as an overseas region, and as <code>FR-RE</code>, as an overseas department. The distinction mirrors France’s administrative laws, and matches the rows in Google’s reports with three potential <code>ISO-3166</code> codes. If we want to join Google’s data with regional statistical data from French or EU official tables, we have to use code <code>FRY4</code> from the Frech <code>NUTS3</code> typology.</p>
+<div id="creating-the-adequate-typology" class="section level2">
+<h2>Creating The Adequate Typology</h2>
+<p>There are some very small sovereign states that do not have any <code>NUTS</code> divisions. Luxembourg is not divided (<code>LU</code> = <code>LU0</code> = <code>LU00</code> = <code>LU000</code>). Our package can project the national data given by Google to any <code>NUTS</code> level, so that these part of Europe fall into the right place on country, <code>NUTS1</code>, <code>NUTS2</code> and <code>NUTS3</code> level data tables, too.</p>
+<p>However, in most cases, the <code>NUTS</code> typology is hierarchical. If we take the example of Malta, which is the smallest member state with the least number of possible divisions (exactly two: <code>MT001</code> refers to the main island of Malta and <code>MT002</code> refers to the smaller islands of <em>Gozo</em> and <em>Comino</em>.) We know that in the hierarchy <code>MT002</code> belongs to <code>MT00</code>, which belongs to <code>MT0</code>, which belongs to the country Malta (<code>MT</code>). Therefore, if we have a bit of ambiguity with a territory, we can still roughly place it, if we at least know at what level would it fit to Europe’s map. In Malta’s case, Google did not divide the country, so we know that Google’s data refers to <code>MT</code> = <code>MT0</code> = <code>MT00</code>, which makes matching with any national (<code>NUTS0</code>), <code>NUTS1</code> or <code>NUTS2</code> level data table possible, although we cannot directly match with <code>NUTS3</code> tables which separate <code>MT001</code> and <code>MT002</code>. In this case, we have to use <code>impute_down_nuts()</code> to impute (project) the <code>MT</code> = <code>MT0</code> = <code>MT00</code> data to <code>MT001</code> and <code>MT002</code>.</p>
+<p>Google provided extremely detailed data for some small countries like Estonia and Latvia, because the <code>ISO-3166-2</code> subdivisons of these relatively small countries are very small, i.e. usually smaller than the <code>NUTS3</code> statistical regions. These countries, due to their size, are not divided in <code>NUTS1</code> and <code>NUTS2</code> levels (<code>EE</code> = <code>EE0</code> = <code>EE00</code>), but they have statistical subdivisions on <code>NUTS3</code> level. The <code>ISO-3166-2</code> used by Google tend to be on a lower level (<code>quasi-NUTS4</code>). The <code>NUTS</code> earlier contained a <code>NUTS4</code> typology, but it was very impractical to use, because divisions at this level tend to change very quickly, and the creation of statistical aggregates is not always possible. For example, it would clearly not be possible disaggregating the GDP in a meaningful to such small territorial units.</p>
+<p>Because most Eurostat data is available only on <code>NUTS2</code> level, we can simply use the <code>EE</code> and <code>LV</code> data from Google and project it to the technical <code>NUT2</code> regions <code>EE00</code> and <code>LV00</code> (both identical to the country itself.) If we would want to match Estonia’s and Latvias data with <code>NUTS3</code> levels statistical tables, we would have to created weighted averages from Googles sub-NUTS3 regions for these countries.</p>
+</div>
+<div id="countries-that-are-not-members-of-the-european-union" class="section level2">
+<h2>Countries That Are Not Members of the European Union</h2>
+<p>In the case of small non-EU member states we applied the same logic, although these countries are at the moment not part of the official NUTS nomenclature. For example, we made Andorra <code>AD</code> = <code>AD0</code> = <code>AD00</code> = <code>AD00</code>. Eurostat’s regional data products usually do not contain data from Andorra, but the national data tables sometimes do, and this data can be safely projected down to the identical technical <code>NUTS1</code> “region” of <code>AD0</code> or the technical <code>NUTS2</code> region of <code>AD00</code>.</p>
+<p>Some non-EU member states, such as Liechtenstein, Norway, Iceland (the European Economic Area), or (potential) EU member canidates on the Balkans, i.e. Albania, Montengro, North Macedonia, Serbia are becoming part of the EU <code>NUTS2021</code>, which is already defined but not yet used, and currently they have <code>NUTS</code> equivalent codes.</p>
+<p>Cyprus is unfortunately not present in the Google Mobility Reports.</p>
+</div>
+<div id="imputation-and-correlation" class="section level2">
+<h2>Imputation And Correlation</h2>
+<p>In many cases the <code>ISO-3166-2</code> subdivisions used by Google correspond to some <code>NUTS</code> typology elements. After figuring out the correct <code>NUTS</code> typology for the Google rows, we can aggregate up <code>NUTS3</code> level data or project down <code>NUTS1</code> data to the <code>NUTS2</code> level, which is the most likely level for practical statistical analysis. In some cases, the <code>ISO-3166-2</code> correspond to <em>earlier</em> definitions of <code>NUTS</code>. We could have chosen to try to match currently non-matched <code>ISO-3166-2</code> with <code>NUTS2010</code> or <code>NUTS2003</code> definitions, and then try to use a time-wise correspondence among <code>NUTS</code> definitions. If we did not find an equivalence with any elements of the <code>NUTS2016</code> definitions, we probably could have found it in the historical <code>NUTS2003</code>, <code>NUTS2010</code> or other typologies, and could have tried to use our timewise-correspondence to find an equivalent. Even if there is a formula that connectes a <code>NUTS2016</code> typological element to various <code>NUTS2003</code> elements, and thus via <code>ISO-3166-2</code>, it would require an almost case-by-case programming to exploit this connection, given that there are many possibilities in time-wise correspondents (see vignette: <a href="http://regions.danielantal.eu/articles/Regional_stats.html">Working With Regional, Sub-National Statistical Products</a>). Instead we used some simplifications when the <code>ISO-3166-2</code> and the currently used <code>NUTS1016</code> typology do not match.</p>
+<p>In some cases, Google merged certain statistical regions of Europe. For example, following the <a href="https://www.iso.org/obp/ui/#iso:code:3166:IT">ISO-3166-2- subdivisions of Italy</a> the culturally autonomous, partly German speaking part of Italy was merged into a single unit (<code>ISO-3166-2</code>: <code>IT-32</code>, with Italian labelling <em>Trentino-Alto Adige</em> and with German labelling <em>Trentino-Südtirol</em>, but Google used an unofficial English labelling), even though these are two undivided <code>NUTS2</code> regions, i.e. Trentino <code>ITD2</code>=<code>ITD20</code> and <em>Alto Adige</em> / <em>Südtirol</em> (<em>South Tyrol</em> for Google) <code>ITD1</code> = <code>ITD10</code>. In this case, comparison is possible, but requires addition or weighting between EU statistical units for joining with Google data. We gave the <code>pseudo-NUTS</code> code <code>ITDX</code> to <em>Trentino-South Tyrol</em>, which clearly identifies the region as part of <code>ITD</code> for <em>Northeastern Italy</em>, and of course as part of <code>IT</code> or <em>Italy</em>.</p>
+<p>For simplicity, we treated some of these historical regions identical to a current one, if the difference was very small. For example, <em>Bragança</em> district in Portugal (in <code>ISO-3166-2</code>: <code>PT-04</code>) was coded as <code>PT11E</code>, because it is almost identical to the <code>NUTS3</code> region <em>Terras de Trás-os-Montes</em>.</p>
+<p>In other cases, when Google’s typology cuts accross current European statistical region lines, we again chose the creation of <code>pseudo-NUTS</code> codes. For example, we created the irregular <code>pseudo-NUTS</code> code <code>PT11X</code> for the <em>Braga district</em> of Portugal (in <code>ISO-3166-2</code>: <code>PT-03</code>), because it is certainly part of <code>PT11</code> <em>Continente</em>, <code>PT11</code> <em>Norte</em>, and the technical <code>NUTS0</code> <code>PT</code> for Portugal, but it does not correspond to any <code>NUTS3</code> units of Portugal in the <code>NUTS2016</code> definition. This coding will not pass the <code>validate_nuts_code()</code> function, but it certainly gives a strong starting point for data imputation.</p>
+<p>We faced many such problems with Portugal and Wales within Great Britain in the United Kingdom.</p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

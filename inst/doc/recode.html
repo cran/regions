@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Recoding &amp; Relabelling</title>
+
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Recoding &amp; Relabelling</h1>
+
+
+
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(regions)</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="kw">library</span>(tidyr)</a></code></pre></div>
+<p>Eurostat offers so-called correspondence tables to follow boundary changes, recoding and relabelling for all NUTS changes since the formalization of the NUTS typology. Unfortunately, these Excel tables do not conform with the requirements of tidy data, and their vocabulary for is not standardized, either. For example, recoding changes are often labelled as recoding, recoding and renaming, code change, Code change, etc.</p>
+<p>The <code>data-raw</code> library contains these Excel tables and very long data wrangling code that unifies the relevant vocabulary of these Excel files and brings the tables into a single, tidy format , starting with the definition <code>NUTS1999</code>. The resulting data file <code>nuts_changes</code> is included in the <code>regions</code> package. It already contains the changes that will come into force in 2021.</p>
+<p>Let’s review a few changes.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">data</span>(nuts_changes)</a>
+<a class="sourceLine" id="cb2-2" title="2"></a>
+<a class="sourceLine" id="cb2-3" title="3">nuts_changes <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="st">  </span><span class="kw">mutate</span> ( <span class="dt">geo_16 =</span> code_<span class="dv">2016</span>, </a>
+<a class="sourceLine" id="cb2-5" title="5">           <span class="dt">geo_13 =</span> code_<span class="dv">2013</span> ) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="st">  </span><span class="kw">filter</span> ( code_<span class="dv">2016</span> <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;FRB&quot;</span>, <span class="st">&quot;HU11&quot;</span>) <span class="op">|</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="st">             </span>code_<span class="dv">2013</span> <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;FR7&quot;</span>, <span class="st">&quot;HU10&quot;</span>, <span class="st">&quot;FR24&quot;</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-8" title="8"><span class="st">  </span><span class="kw">select</span> ( typology, geo_<span class="dv">16</span>, geo_<span class="dv">13</span>, start_year,</a>
+<a class="sourceLine" id="cb2-9" title="9">           code_<span class="dv">2013</span>, change_<span class="dv">2013</span>,</a>
+<a class="sourceLine" id="cb2-10" title="10">           code_<span class="dv">2016</span>, change_<span class="dv">2016</span> ) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-11" title="11"><span class="st">  </span><span class="kw">pivot_longer</span> ( <span class="dt">cols =</span> <span class="kw">starts_with</span>(<span class="st">&quot;code&quot;</span>), </a>
+<a class="sourceLine" id="cb2-12" title="12">                 <span class="dt">names_to =</span> <span class="st">&#39;definition&#39;</span>, </a>
+<a class="sourceLine" id="cb2-13" title="13">                 <span class="dt">values_to =</span> <span class="st">&#39;code&#39;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-14" title="14"><span class="st">  </span><span class="kw">pivot_longer</span> ( <span class="dt">cols =</span> <span class="kw">starts_with</span>(<span class="st">&quot;change&quot;</span>), </a>
+<a class="sourceLine" id="cb2-15" title="15">                 <span class="dt">names_to =</span> <span class="st">&#39;change&#39;</span>, </a>
+<a class="sourceLine" id="cb2-16" title="16">                 <span class="dt">values_to =</span> <span class="st">&#39;description&#39;</span>)  <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-17" title="17"><span class="st">  </span><span class="kw">filter</span> (<span class="op">!</span><span class="kw">is.na</span>(description), </a>
+<a class="sourceLine" id="cb2-18" title="18">          <span class="op">!</span><span class="kw">is.na</span>(code)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-19" title="19"><span class="st">  </span><span class="kw">select</span> ( <span class="op">-</span>change ) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb2-20" title="20"><span class="st">  </span>knitr<span class="op">::</span><span class="kw">kable</span> ()</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">typology</th>
+<th align="left">geo_16</th>
+<th align="left">geo_13</th>
+<th align="right">start_year</th>
+<th align="left">definition</th>
+<th align="left">code</th>
+<th align="left">description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">nuts_level_1</td>
+<td align="left">FRB</td>
+<td align="left">NA</td>
+<td align="right">2016</td>
+<td align="left">code_2016</td>
+<td align="left">FRB</td>
+<td align="left">new nuts 1 region, identical to ex-nuts 2 region fr24</td>
+</tr>
+<tr class="even">
+<td align="left">nuts_level_1</td>
+<td align="left">FRK</td>
+<td align="left">FR7</td>
+<td align="right">NA</td>
+<td align="left">code_2013</td>
+<td align="left">FR7</td>
+<td align="left">relabelled and recoded</td>
+</tr>
+<tr class="odd">
+<td align="left">nuts_level_1</td>
+<td align="left">FRK</td>
+<td align="left">FR7</td>
+<td align="right">NA</td>
+<td align="left">code_2016</td>
+<td align="left">FRK</td>
+<td align="left">relabelled and recoded</td>
+</tr>
+<tr class="even">
+<td align="left">nuts_level_1</td>
+<td align="left">NA</td>
+<td align="left">FR7</td>
+<td align="right">NA</td>
+<td align="left">code_2013</td>
+<td align="left">FR7</td>
+<td align="left">discontinued</td>
+</tr>
+<tr class="odd">
+<td align="left">nuts_level_2</td>
+<td align="left">FRB0</td>
+<td align="left">FR24</td>
+<td align="right">NA</td>
+<td align="left">code_2013</td>
+<td align="left">FR24</td>
+<td align="left">recoded and relabelled</td>
+</tr>
+<tr class="even">
+<td align="left">nuts_level_2</td>
+<td align="left">FRB0</td>
+<td align="left">FR24</td>
+<td align="right">NA</td>
+<td align="left">code_2016</td>
+<td align="left">FRB0</td>
+<td align="left">recoded and relabelled</td>
+</tr>
+<tr class="odd">
+<td align="left">nuts_level_2</td>
+<td align="left">HU11</td>
+<td align="left">NA</td>
+<td align="right">2016</td>
+<td align="left">code_2016</td>
+<td align="left">HU11</td>
+<td align="left">new region, equals ex-nuts 3 region hu101</td>
+</tr>
+<tr class="even">
+<td align="left">nuts_level_2</td>
+<td align="left">NA</td>
+<td align="left">HU10</td>
+<td align="right">NA</td>
+<td align="left">code_2013</td>
+<td align="left">HU10</td>
+<td align="left">discontinued; split into new hu11 and hu12</td>
+</tr>
+</tbody>
+</table>
+<p>You will not find the <code>geo</code> identifier <code>FRB</code> in any statistical data that was released before France changes its administrative boundaries and the <code>NUTS2016</code> boundary definition came into force. However, as the description says, you may find historical data elsewhere, in a historical NUTS2-level product for the <code>FRB</code> <em>CENTRE — VAL DE LOIRE</em> <code>NUTS1</code> region, because it is identical to the earlier <code>NUTS2</code> level region <code>FR24</code>, i.e. Central France, which was known as <em>Centre</em> for many years before the transition to <code>NUTS2016</code>. The size and importance of this territorial unit is more similar to <code>NUTS1</code> than <code>NUTS2</code> units.</p>
+<p>Because <code>FRB</code> contains only one <code>FRB0</code>, the earlier <code>FR24</code>, it is technically identified as a NUTS2-level region, too. You find the same data in the <code>NUTS2</code> typology. With statistical products on NUTS2 level, you can simply recode historical <code>FR24</code> data to <code>FRB0</code>, since the aggregation level and the boundaries are not changed. Furthermore, you can project this data to any <code>NUTS1</code> level panel either under the earlier <code>FR2</code> <code>NUTS1</code> label, if you use the old definition, or the new <code>FRB</code> label, if you use the current <code>NUTS2016</code> typology.</p>
+<p>Let’s see a hypothetical data frame with random variables. (Usually a data frame has no so many issues, so a more detailed example can be constructed this way.)</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">example_df &lt;-<span class="st"> </span><span class="kw">data.frame</span> ( </a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="dt">geo  =</span>  <span class="kw">c</span>(<span class="st">&quot;FR&quot;</span>, <span class="st">&quot;DEE32&quot;</span>, <span class="st">&quot;UKI3&quot;</span> ,</a>
+<a class="sourceLine" id="cb3-3" title="3">            <span class="st">&quot;HU12&quot;</span>, <span class="st">&quot;DED&quot;</span>, </a>
+<a class="sourceLine" id="cb3-4" title="4">            <span class="st">&quot;FRK&quot;</span>), </a>
+<a class="sourceLine" id="cb3-5" title="5">  <span class="dt">values =</span> <span class="kw">runif</span>(<span class="dv">6</span>, <span class="dv">0</span>, <span class="dv">100</span> ),</a>
+<a class="sourceLine" id="cb3-6" title="6">  <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span> )</a>
+<a class="sourceLine" id="cb3-7" title="7"></a>
+<a class="sourceLine" id="cb3-8" title="8"><span class="kw">recode_nuts</span>(<span class="dt">dat =</span> example_df, <span class="dt">nuts_year =</span> <span class="dv">2013</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb3-9" title="9"><span class="st">  </span><span class="kw">select</span> ( geo, values, code_<span class="dv">2013</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb3-10" title="10"><span class="st">  </span>knitr<span class="op">::</span><span class="kw">kable</span>()</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">geo</th>
+<th align="right">values</th>
+<th align="left">code_2013</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">FR</td>
+<td align="right">1.505699</td>
+<td align="left">FR</td>
+</tr>
+<tr class="even">
+<td align="left">UKI3</td>
+<td align="right">68.621030</td>
+<td align="left">UKI3</td>
+</tr>
+<tr class="odd">
+<td align="left">DED</td>
+<td align="right">64.120926</td>
+<td align="left">DED</td>
+</tr>
+<tr class="even">
+<td align="left">FRK</td>
+<td align="right">80.361175</td>
+<td align="left">FR7</td>
+</tr>
+<tr class="odd">
+<td align="left">HU12</td>
+<td align="right">30.802095</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">DEE32</td>
+<td align="right">3.921671</td>
+<td align="left">NA</td>
+</tr>
+</tbody>
+</table>
+<p>In this hypothetical example we are creating backward compatibility with the <code>NUTS2013</code> definition. There are three type of observations:</p>
+<ul>
+<li>Observations about typologies that did not change. There is not further thing to do to make the data comparable across time.</li>
+<li>Typologies which changed their geo codes, but are not affected by boundary changes, i.e. the data is comparable, it is only found at a different geographical label</li>
+<li>Typologies that are not comparable, and we cannot compare them meaningfully with a <code>NUTS2013</code> dataset.</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">recode_nuts</span>(example_df, <span class="dt">nuts_year =</span> <span class="dv">2013</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="st">  </span><span class="kw">select</span> ( geo, values, typology_change, code_<span class="dv">2013</span> ) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="st">  </span>knitr<span class="op">::</span><span class="kw">kable</span>()</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">geo</th>
+<th align="right">values</th>
+<th align="left">typology_change</th>
+<th align="left">code_2013</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">FR</td>
+<td align="right">1.505699</td>
+<td align="left">NA</td>
+<td align="left">FR</td>
+</tr>
+<tr class="even">
+<td align="left">UKI3</td>
+<td align="right">68.621030</td>
+<td align="left">NA</td>
+<td align="left">UKI3</td>
+</tr>
+<tr class="odd">
+<td align="left">DED</td>
+<td align="right">64.120926</td>
+<td align="left">NA</td>
+<td align="left">DED</td>
+</tr>
+<tr class="even">
+<td align="left">FRK</td>
+<td align="right">80.361175</td>
+<td align="left">Recoded from FRK [used in NUTS 2016-2021]</td>
+<td align="left">FR7</td>
+</tr>
+<tr class="odd">
+<td align="left">HU12</td>
+<td align="right">30.802095</td>
+<td align="left">Used in NUTS 2016-2021</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">DEE32</td>
+<td align="right">3.921671</td>
+<td align="left">Used in NUTS 1999-2003</td>
+<td align="left">NA</td>
+</tr>
+</tbody>
+</table>
+<p>The first three observations are comparable with a <code>NUTS2013</code> dataset. The fourth observation is comparable, too, but when joining with a <code>NUTS2013</code> dataset or map, it is likely that <code>FRK</code> needs to be re-coded to <code>FR7</code>.</p>
+<p>The following data can be joined with a <code>NUTS2013</code> dataset or map:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">recode_nuts</span>(example_df, <span class="dt">nuts_year =</span> <span class="dv">2013</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="st">  </span><span class="kw">select</span> ( code_<span class="dv">2013</span>, values, typology_change ) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="st">  </span><span class="kw">rename</span> ( <span class="dt">geo =</span> code_<span class="dv">2013</span> ) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="st">  </span><span class="kw">filter</span> ( <span class="op">!</span><span class="kw">is.na</span>(geo)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="st">  </span>knitr<span class="op">::</span><span class="kw">kable</span>()</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">geo</th>
+<th align="right">values</th>
+<th align="left">typology_change</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">FR</td>
+<td align="right">1.505699</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">UKI3</td>
+<td align="right">68.621030</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">DED</td>
+<td align="right">64.120926</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">FR7</td>
+<td align="right">80.361175</td>
+<td align="left">Recoded from FRK [used in NUTS 2016-2021]</td>
+</tr>
+</tbody>
+</table>
+<p>And re-assuringly these data will be compatible with the next NUTS typology, too!</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">recode_nuts</span>(example_df, <span class="dt">nuts_year =</span> <span class="dv">2021</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="st">  </span><span class="kw">select</span> ( code_<span class="dv">2021</span>, values, typology_change ) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="st">  </span><span class="kw">rename</span> ( <span class="dt">geo =</span> code_<span class="dv">2021</span> ) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="st">  </span><span class="kw">filter</span> ( <span class="op">!</span><span class="kw">is.na</span>(geo)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="st">  </span>knitr<span class="op">::</span><span class="kw">kable</span>()</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">geo</th>
+<th align="right">values</th>
+<th align="left">typology_change</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">FR</td>
+<td align="right">1.505699</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">UKI3</td>
+<td align="right">68.621030</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">HU12</td>
+<td align="right">30.802095</td>
+<td align="left">NA</td>
+</tr>
+<tr class="even">
+<td align="left">DED</td>
+<td align="right">64.120926</td>
+<td align="left">NA</td>
+</tr>
+<tr class="odd">
+<td align="left">FRK</td>
+<td align="right">80.361175</td>
+<td align="left">NA</td>
+</tr>
+</tbody>
+</table>
+<p>What about <code>HU12</code>?</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">data</span>(nuts_changes) </a>
+<a class="sourceLine" id="cb7-2" title="2">nuts_changes <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="st">  </span><span class="kw">select</span> ( code_<span class="dv">2016</span>, geo_name_<span class="dv">2016</span>, change_<span class="dv">2016</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="st">  </span><span class="kw">filter</span> ( code_<span class="dv">2016</span> <span class="op">==</span><span class="st"> &quot;HU12&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-5" title="5"><span class="st">  </span><span class="kw">filter</span>(<span class="kw">complete.cases</span>(.)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb7-6" title="6"><span class="st">  </span>knitr<span class="op">::</span><span class="kw">kable</span>()</a></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th align="left">code_2016</th>
+<th align="left">geo_name_2016</th>
+<th align="left">change_2016</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">HU12</td>
+<td align="left">Pest</td>
+<td align="left">new region, equals ex-nuts 3 region hu102</td>
+</tr>
+</tbody>
+</table>
+<p>The description in the correspondence tables clarifies that in fact historical data may be assembled for <code>HU12</code> (<em>Pest county</em>.)</p>
+<ul>
+<li>It can be accessed from national LAU sources (as <code>HU-PE</code>) or for <code>NUTS3</code> data (as <code>HU102</code>)</li>
+<li>It can be calculated by deducting the Budapest data from the former Central Hungary <code>NUTS1</code> region data.</li>
+</ul>
+<p>That will be the topic of a later vignette on aggregation and re-aggregation.</p>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
