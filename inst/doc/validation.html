@@ -14,13 +14,29 @@
 
 <title>Validating Your Typology</title>
 
+<script>// Hide empty <a> tag within highlighted CodeBlock for screen reader accessibility (see https://github.com/jgm/pandoc/issues/6352#issuecomment-626106786) -->
+// v0.0.1
+// Written by JooYoung Seo (jooyoung@psu.edu) and Atsushi Yasumoto on June 1st, 2020.
+
+document.addEventListener('DOMContentLoaded', function() {
+  const codeList = document.getElementsByClassName("sourceCode");
+  for (var i = 0; i < codeList.length; i++) {
+    var linkList = codeList[i].getElementsByTagName('a');
+    for (var j = 0; j < linkList.length; j++) {
+      if (linkList[j].innerHTML === "") {
+        linkList[j].setAttribute('aria-hidden', 'true');
+      }
+    }
+  }
+});
+</script>
 
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -30,14 +46,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -46,9 +64,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -301,33 +319,33 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 
 
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(regions)</a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb1-3" title="3"><span class="kw">library</span>(tidyr)</a>
-<a class="sourceLine" id="cb1-4" title="4"><span class="kw">data</span>(daily_internet_users)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(regions)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">library</span>(tidyr)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">data</span>(daily_internet_users)</span></code></pre></div>
 <p>The <code>daily_internet_users</code> data set is created by this code, which is not evaluated here:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">isoc_r_iuse_i &lt;-<span class="st"> </span>eurostat<span class="op">::</span><span class="kw">get_eurostat</span>(<span class="st">&quot;isoc_r_iuse_i&quot;</span>,</a>
-<a class="sourceLine" id="cb2-2" title="2">                                        <span class="dt">time_format =</span> <span class="st">&quot;num&quot;</span>) </a>
-<a class="sourceLine" id="cb2-3" title="3"></a>
-<a class="sourceLine" id="cb2-4" title="4">daily_internet_users &lt;-<span class="st"> </span>isoc_r_iuse_i  <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb2-5" title="5"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span> ( unit <span class="op">==</span><span class="st"> &quot;PC_IND&quot;</span>,          <span class="co"># percentage of individuals</span></a>
-<a class="sourceLine" id="cb2-6" title="6">                  indic_is <span class="op">==</span><span class="st"> &quot;I_IDAY&quot;</span>) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># daily internet users</span></a>
-<a class="sourceLine" id="cb2-7" title="7"><span class="st">  </span><span class="kw">select</span> (geo, time, values )</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>isoc_r_iuse_i &lt;-<span class="st"> </span>eurostat<span class="op">::</span><span class="kw">get_eurostat</span>(<span class="st">&quot;isoc_r_iuse_i&quot;</span>,</span>
+<span id="cb2-2"><a href="#cb2-2"></a>                                        <span class="dt">time_format =</span> <span class="st">&quot;num&quot;</span>) </span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a>daily_internet_users &lt;-<span class="st"> </span>isoc_r_iuse_i  <span class="op">%&gt;%</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span> ( unit <span class="op">==</span><span class="st"> &quot;PC_IND&quot;</span>,          <span class="co"># percentage of individuals</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a>                  indic_is <span class="op">==</span><span class="st"> &quot;I_IDAY&quot;</span>) <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># daily internet users</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="st">  </span><span class="kw">select</span> (geo, time, values )</span></code></pre></div>
 <p>Simply downloading a regional statistics from the Eurostat data warehouse and placing the observation on the same map does not work. If you look into the data, you may realize that the geo codes of French, Lithuanian or Hungarian regions, to name a few, do not match in the years 2012 and 2018.</p>
 <p>Let’s have a look at these countries in two years, using the helper function <code>get_country_code</code>. The year 2012 is coded with the <code>NUTS2010</code> typology and the year 2018 with the <code>NUTS2016</code> typology. Then we use the <code>valideate_nuts_region</code> function with the default <code>NUTS2016</code> (which is currently valid in the European Union) and the obsolete <code>NUTS2010</code> definitions.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">test &lt;-<span class="st"> </span>daily_internet_users  <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb3-2" title="2"><span class="st">  </span><span class="kw">mutate</span> ( <span class="dt">country_code =</span> <span class="kw">get_country_code</span>(<span class="dt">geo =</span> geo) ) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb3-3" title="3"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span> ( time <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">2012</span>, <span class="dv">2018</span>),</a>
-<a class="sourceLine" id="cb3-4" title="4">                  country_code <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;FR&quot;</span>, <span class="st">&quot;HU&quot;</span>, <span class="st">&quot;LT&quot;</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb3-5" title="5"><span class="st">  </span><span class="kw">mutate</span> ( <span class="dt">time =</span> <span class="kw">paste0</span>(<span class="st">&quot;Y&quot;</span>, time )) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb3-6" title="6"><span class="st">  </span><span class="kw">pivot_wider</span> (., <span class="dt">names_from =</span><span class="st">&quot;time&quot;</span>, <span class="dt">values_from =</span> <span class="st">&quot;values&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb3-7" title="7"><span class="st">  </span><span class="kw">validate_nuts_regions</span>() <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># default year the current valid 2016</span></a>
-<a class="sourceLine" id="cb3-8" title="8"><span class="st">  </span><span class="kw">validate_nuts_regions</span>(.,  <span class="dt">nuts_year =</span> <span class="dv">2010</span> )</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>test &lt;-<span class="st"> </span>daily_internet_users  <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="st">  </span><span class="kw">mutate</span> ( <span class="dt">country_code =</span> <span class="kw">get_country_code</span>(<span class="dt">geo =</span> geo) ) <span class="op">%&gt;%</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">filter</span> ( time <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">2012</span>, <span class="dv">2018</span>),</span>
+<span id="cb3-4"><a href="#cb3-4"></a>                  country_code <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;FR&quot;</span>, <span class="st">&quot;HU&quot;</span>, <span class="st">&quot;LT&quot;</span>)) <span class="op">%&gt;%</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="st">  </span><span class="kw">mutate</span> ( <span class="dt">time =</span> <span class="kw">paste0</span>(<span class="st">&quot;Y&quot;</span>, time )) <span class="op">%&gt;%</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="st">  </span><span class="kw">pivot_wider</span> (., <span class="dt">names_from =</span><span class="st">&quot;time&quot;</span>, <span class="dt">values_from =</span> <span class="st">&quot;values&quot;</span>) <span class="op">%&gt;%</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="st">  </span><span class="kw">validate_nuts_regions</span>() <span class="op">%&gt;%</span><span class="st">  </span><span class="co"># default year the current valid 2016</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="st">  </span><span class="kw">validate_nuts_regions</span>(.,  <span class="dt">nuts_year =</span> <span class="dv">2010</span> )</span></code></pre></div>
 <p>The following NUTS regions codes are not valid in the 2010 definition. These sub-national divisions were defined in 2013 or 2016. Some of these regional boundaries did not change, but got new codes after altering the administrative divisions of France. Some of the seemingly missing 2012 data can be found under different codes.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># only first 10 regions are printed</span></a>
-<a class="sourceLine" id="cb4-2" title="2">knitr<span class="op">::</span><span class="kw">kable</span>( </a>
-<a class="sourceLine" id="cb4-3" title="3">  <span class="kw">head</span>(test [ <span class="op">!</span><span class="st"> </span>test<span class="op">$</span>valid_<span class="dv">2010</span>, ], <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb4-4" title="4">)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># only first 10 regions are printed</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>knitr<span class="op">::</span><span class="kw">kable</span>( </span>
+<span id="cb4-3"><a href="#cb4-3"></a>  <span class="kw">head</span>(test [ <span class="op">!</span><span class="st"> </span>test<span class="op">$</span>valid_<span class="dv">2010</span>, ], <span class="dv">10</span>)</span>
+<span id="cb4-4"><a href="#cb4-4"></a>)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -335,8 +353,9 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <th align="left">country_code</th>
 <th align="right">Y2018</th>
 <th align="right">Y2012</th>
-<th align="left">typology</th>
+<th align="left">orig_typology</th>
 <th align="left">valid_2016</th>
+<th align="left">typology</th>
 <th align="left">valid_2010</th>
 </tr>
 </thead>
@@ -346,8 +365,9 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <td align="left">FR</td>
 <td align="right">70</td>
 <td align="right">NA</td>
-<td align="left">iso-3166-alpha-3</td>
+<td align="left">nuts_level_1</td>
 <td align="left">TRUE</td>
+<td align="left">NA</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="even">
@@ -357,6 +377,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <td align="right">NA</td>
 <td align="left">nuts_level_2</td>
 <td align="left">TRUE</td>
+<td align="left">NA</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="odd">
@@ -364,8 +385,9 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <td align="left">FR</td>
 <td align="right">72</td>
 <td align="right">NA</td>
-<td align="left">iso-3166-alpha-3</td>
+<td align="left">nuts_level_1</td>
 <td align="left">TRUE</td>
+<td align="left">NA</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="even">
@@ -375,6 +397,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <td align="right">NA</td>
 <td align="left">nuts_level_2</td>
 <td align="left">TRUE</td>
+<td align="left">NA</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="odd">
@@ -384,6 +407,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <td align="right">NA</td>
 <td align="left">nuts_level_2</td>
 <td align="left">TRUE</td>
+<td align="left">NA</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="even">
@@ -391,8 +415,9 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <td align="left">FR</td>
 <td align="right">79</td>
 <td align="right">NA</td>
-<td align="left">iso-3166-alpha-3</td>
+<td align="left">nuts_level_1</td>
 <td align="left">TRUE</td>
+<td align="left">NA</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="odd">
@@ -402,6 +427,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <td align="right">NA</td>
 <td align="left">nuts_level_2</td>
 <td align="left">TRUE</td>
+<td align="left">NA</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="even">
@@ -411,6 +437,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <td align="right">NA</td>
 <td align="left">nuts_level_2</td>
 <td align="left">TRUE</td>
+<td align="left">NA</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="odd">
@@ -418,8 +445,9 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <td align="left">FR</td>
 <td align="right">75</td>
 <td align="right">NA</td>
-<td align="left">iso-3166-alpha-3</td>
+<td align="left">nuts_level_1</td>
 <td align="left">TRUE</td>
+<td align="left">NA</td>
 <td align="left">FALSE</td>
 </tr>
 <tr class="even">
@@ -429,14 +457,15 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <td align="right">NA</td>
 <td align="left">nuts_level_2</td>
 <td align="left">TRUE</td>
+<td align="left">NA</td>
 <td align="left">FALSE</td>
 </tr>
 </tbody>
 </table>
 <p>And there are two regions that are not valid in 2016, because these typologies were changed. Vilnius and Budapest, two big cities, were detached from their larger containing regional units.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1">knitr<span class="op">::</span><span class="kw">kable</span>(</a>
-<a class="sourceLine" id="cb5-2" title="2">  test [ <span class="op">!</span><span class="st"> </span>test<span class="op">$</span>valid_<span class="dv">2016</span>, ]</a>
-<a class="sourceLine" id="cb5-3" title="3">)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>knitr<span class="op">::</span><span class="kw">kable</span>(</span>
+<span id="cb5-2"><a href="#cb5-2"></a>  test [ <span class="op">!</span><span class="st"> </span>test<span class="op">$</span>valid_<span class="dv">2016</span>, ]</span>
+<span id="cb5-3"><a href="#cb5-3"></a>)</span></code></pre></div>
 <table>
 <thead>
 <tr class="header">
@@ -444,8 +473,9 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <th align="left">country_code</th>
 <th align="right">Y2018</th>
 <th align="right">Y2012</th>
-<th align="left">typology</th>
+<th align="left">orig_typology</th>
 <th align="left">valid_2016</th>
+<th align="left">typology</th>
 <th align="left">valid_2010</th>
 </tr>
 </thead>
@@ -455,8 +485,9 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <td align="left">HU</td>
 <td align="right">NA</td>
 <td align="right">68</td>
-<td align="left">nuts_level_2</td>
+<td align="left">NA</td>
 <td align="left">FALSE</td>
+<td align="left">nuts_level_2</td>
 <td align="left">TRUE</td>
 </tr>
 <tr class="even">
@@ -464,8 +495,9 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <td align="left">LT</td>
 <td align="right">NA</td>
 <td align="right">49</td>
-<td align="left">nuts_level_2</td>
+<td align="left">NA</td>
 <td align="left">FALSE</td>
+<td align="left">nuts_level_2</td>
 <td align="left">TRUE</td>
 </tr>
 </tbody>

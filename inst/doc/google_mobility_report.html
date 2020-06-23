@@ -14,13 +14,29 @@
 
 <title>The Typology Of The Google Mobility Reports (COVID-19)</title>
 
+<script>// Hide empty <a> tag within highlighted CodeBlock for screen reader accessibility (see https://github.com/jgm/pandoc/issues/6352#issuecomment-626106786) -->
+// v0.0.1
+// Written by JooYoung Seo (jooyoung@psu.edu) and Atsushi Yasumoto on June 1st, 2020.
+
+document.addEventListener('DOMContentLoaded', function() {
+  const codeList = document.getElementsByClassName("sourceCode");
+  for (var i = 0; i < codeList.length; i++) {
+    var linkList = codeList[i].getElementsByTagName('a');
+    for (var j = 0; j < linkList.length; j++) {
+      if (linkList[j].innerHTML === "") {
+        linkList[j].setAttribute('aria-hidden', 'true');
+      }
+    }
+  }
+});
+</script>
 
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -30,14 +46,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -46,9 +64,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -301,9 +319,9 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 
 
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">library</span>(regions)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(regions)</span></code></pre></div>
 <p>Google is not using those sub-national divisions (region), that the EU or OECD is using for statistical purposes. This means that any comparison of Google’s Mobility Reports with population, transport, public health, or economic variable requires a sub-national division vocabulary for translation, or in the EU parlance a <em>correspondence table</em>.</p>
-<p>Google appears to be using, at least in most of the cases, the <code>ISO-3166-2</code> sub-national divisions from the <em>ISO 3166 Codes for the representation of names of countries and their subdivisions</em> with non-standard naming (labels). When we want to analyze the Google Mobility Report together with national statistics, this causes several problems:</p>
+<p>Google appears to be using, at least in most of the cases, the <code>ISO-3166-2</code> sub-national divisions from the <em>ISO 3166 Codes for the representation of names of countries and their subdivisions</em> with non-standard naming (labels). When we want to analyse the Google Mobility Report together with national statistics, this causes several problems:</p>
 <ul>
 <li><p><code>ISO-3166-2</code> is not a hierarchical typology, while Europe’s statistical typologies, the <code>NUTS1</code>-<code>NUTS2</code>-<code>NUTS3</code> are hierarchical, so we had to create many hundred lines of <code>R</code> code to create the necessary descriptive metadata for joining the <code>ISO</code>-like Google and the <code>NUTS</code> typologies of Europe.</p></li>
 <li><p>The <code>ISO-3166-2</code> is changing very fast, within Europe there are many changes every year; however, these changes are not so easy to trace as the changes within the European statistical nomenclature (NUTS). We are unsure how Google handles changes in <code>ISO-3166-2</code> over the coverage of the Mobility Reports.</p></li>
@@ -328,7 +346,7 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 <p>In many cases the <code>ISO-3166-2</code> subdivisions used by Google correspond to some <code>NUTS</code> typology elements. After figuring out the correct <code>NUTS</code> typology for the Google rows, we can aggregate up <code>NUTS3</code> level data or project down <code>NUTS1</code> data to the <code>NUTS2</code> level, which is the most likely level for practical statistical analysis. In some cases, the <code>ISO-3166-2</code> correspond to <em>earlier</em> definitions of <code>NUTS</code>. We could have chosen to try to match currently non-matched <code>ISO-3166-2</code> with <code>NUTS2010</code> or <code>NUTS2003</code> definitions, and then try to use a time-wise correspondence among <code>NUTS</code> definitions. If we did not find an equivalence with any elements of the <code>NUTS2016</code> definitions, we probably could have found it in the historical <code>NUTS2003</code>, <code>NUTS2010</code> or other typologies, and could have tried to use our timewise-correspondence to find an equivalent. Even if there is a formula that connectes a <code>NUTS2016</code> typological element to various <code>NUTS2003</code> elements, and thus via <code>ISO-3166-2</code>, it would require an almost case-by-case programming to exploit this connection, given that there are many possibilities in time-wise correspondents (see vignette: <a href="http://regions.danielantal.eu/articles/Regional_stats.html">Working With Regional, Sub-National Statistical Products</a>). Instead we used some simplifications when the <code>ISO-3166-2</code> and the currently used <code>NUTS1016</code> typology do not match.</p>
 <p>In some cases, Google merged certain statistical regions of Europe. For example, following the <a href="https://www.iso.org/obp/ui/#iso:code:3166:IT">ISO-3166-2- subdivisions of Italy</a> the culturally autonomous, partly German speaking part of Italy was merged into a single unit (<code>ISO-3166-2</code>: <code>IT-32</code>, with Italian labelling <em>Trentino-Alto Adige</em> and with German labelling <em>Trentino-Südtirol</em>, but Google used an unofficial English labelling), even though these are two undivided <code>NUTS2</code> regions, i.e. Trentino <code>ITD2</code>=<code>ITD20</code> and <em>Alto Adige</em> / <em>Südtirol</em> (<em>South Tyrol</em> for Google) <code>ITD1</code> = <code>ITD10</code>. In this case, comparison is possible, but requires addition or weighting between EU statistical units for joining with Google data. We gave the <code>pseudo-NUTS</code> code <code>ITDX</code> to <em>Trentino-South Tyrol</em>, which clearly identifies the region as part of <code>ITD</code> for <em>Northeastern Italy</em>, and of course as part of <code>IT</code> or <em>Italy</em>.</p>
 <p>For simplicity, we treated some of these historical regions identical to a current one, if the difference was very small. For example, <em>Bragança</em> district in Portugal (in <code>ISO-3166-2</code>: <code>PT-04</code>) was coded as <code>PT11E</code>, because it is almost identical to the <code>NUTS3</code> region <em>Terras de Trás-os-Montes</em>.</p>
-<p>In other cases, when Google’s typology cuts accross current European statistical region lines, we again chose the creation of <code>pseudo-NUTS</code> codes. For example, we created the irregular <code>pseudo-NUTS</code> code <code>PT11X</code> for the <em>Braga district</em> of Portugal (in <code>ISO-3166-2</code>: <code>PT-03</code>), because it is certainly part of <code>PT11</code> <em>Continente</em>, <code>PT11</code> <em>Norte</em>, and the technical <code>NUTS0</code> <code>PT</code> for Portugal, but it does not correspond to any <code>NUTS3</code> units of Portugal in the <code>NUTS2016</code> definition. This coding will not pass the <code>validate_nuts_code()</code> function, but it certainly gives a strong starting point for data imputation.</p>
+<p>In other cases, when Google’s typology cuts across current European statistical region lines, we again chose the creation of <code>pseudo-NUTS</code> codes. For example, we created the irregular <code>pseudo-NUTS</code> code <code>PT11X</code> for the <em>Braga district</em> of Portugal (in <code>ISO-3166-2</code>: <code>PT-03</code>), because it is certainly part of <code>PT11</code> <em>Continente</em>, <code>PT11</code> <em>Norte</em>, and the technical <code>NUTS0</code> <code>PT</code> for Portugal, but it does not correspond to any <code>NUTS3</code> units of Portugal in the <code>NUTS2016</code> definition. This coding will not pass the <code>validate_nuts_code()</code> function, but it certainly gives a strong starting point for data imputation.</p>
 <p>We faced many such problems with Portugal and Wales within Great Britain in the United Kingdom.</p>
 </div>
 
