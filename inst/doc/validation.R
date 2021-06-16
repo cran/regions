@@ -4,7 +4,7 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 
-## ----setup, message=FALSE, warnings=FALSE-------------------------------------
+## ----setup, message=FALSE, warnings=FALSE, echo=FALSE-------------------------
 library(regions)
 library(dplyr)
 library(tidyr)
@@ -21,7 +21,7 @@ data(daily_internet_users)
 
 ## ----testvalidate-------------------------------------------------------------
 test <- daily_internet_users  %>% 
-  mutate ( country_code = get_country_code(geo = geo) ) %>%
+  mutate ( country_code = get_country_code(geo = .data$geo) ) %>%
   dplyr::filter ( time %in% c(2012, 2018),
                   country_code %in% c("FR", "HU", "LT")) %>%
   mutate ( time = paste0("Y", time )) %>%

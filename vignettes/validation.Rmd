@@ -14,14 +14,14 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup, message=FALSE, warnings=FALSE}
+```{r setup, message=FALSE, warnings=FALSE, echo=FALSE}
 library(regions)
 library(dplyr)
 library(tidyr)
 data(daily_internet_users)
 ```
 
-The `daily_internet_users` data set is created by this code, which is not evaluated here: 
+The `daily_internet_users` data set is created by this code, which is not evaluated here in this vignette: 
 
 ```{r example, eval=FALSE}
 isoc_r_iuse_i <- eurostat::get_eurostat("isoc_r_iuse_i",
@@ -40,7 +40,7 @@ Let's have a look at these countries in two years, using the helper function `ge
 
 ```{r testvalidate}
 test <- daily_internet_users  %>% 
-  mutate ( country_code = get_country_code(geo = geo) ) %>%
+  mutate ( country_code = get_country_code(geo = .data$geo) ) %>%
   dplyr::filter ( time %in% c(2012, 2018),
                   country_code %in% c("FR", "HU", "LT")) %>%
   mutate ( time = paste0("Y", time )) %>%

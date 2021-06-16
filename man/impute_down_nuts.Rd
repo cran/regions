@@ -58,10 +58,10 @@ The imputed dataset \code{dat} must refer to a single time unit, i.e.
 panel data is not supported.
 }
 \examples{
-{
+\dontrun{
 data(mixed_nuts_example)
 impute_down_nuts(mixed_nuts_example, nuts_year = 2016)
-} 
+}
 }
 \seealso{
 Other impute functions: 

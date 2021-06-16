@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Mapping Regional Data, Mapping Metadata Problems</title>
+
+<script src="data:application/javascript;base64,Ly8gUGFuZG9jIDIuOSBhZGRzIGF0dHJpYnV0ZXMgb24gYm90aCBoZWFkZXIgYW5kIGRpdi4gV2UgcmVtb3ZlIHRoZSBmb3JtZXIgKHRvCi8vIGJlIGNvbXBhdGlibGUgd2l0aCB0aGUgYmVoYXZpb3Igb2YgUGFuZG9jIDwgMi44KS4KZG9jdW1lbnQuYWRkRXZlbnRMaXN0ZW5lcignRE9NQ29udGVudExvYWRlZCcsIGZ1bmN0aW9uKGUpIHsKICB2YXIgaHMgPSBkb2N1bWVudC5xdWVyeVNlbGVjdG9yQWxsKCJkaXYuc2VjdGlvbltjbGFzcyo9J2xldmVsJ10gPiA6Zmlyc3QtY2hpbGQiKTsKICB2YXIgaSwgaCwgYTsKICBmb3IgKGkgPSAwOyBpIDwgaHMubGVuZ3RoOyBpKyspIHsKICAgIGggPSBoc1tpXTsKICAgIGlmICghL15oWzEtNl0kL2kudGVzdChoLnRhZ05hbWUpKSBjb250aW51ZTsgIC8vIGl0IHNob3VsZCBiZSBhIGhlYWRlciBoMS1oNgogICAgYSA9IGguYXR0cmlidXRlczsKICAgIHdoaWxlIChhLmxlbmd0aCA+IDApIGgucmVtb3ZlQXR0cmlidXRlKGFbMF0ubmFtZSk7CiAgfQp9KTsK"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<link rel="stylesheet" href="data:text/css,body%20%7B%0Abackground%2Dcolor%3A%20%23fff%3B%0Amargin%3A%201em%20auto%3B%0Amax%2Dwidth%3A%20700px%3B%0Aoverflow%3A%20visible%3B%0Apadding%2Dleft%3A%202em%3B%0Apadding%2Dright%3A%202em%3B%0Afont%2Dfamily%3A%20%22Open%20Sans%22%2C%20%22Helvetica%20Neue%22%2C%20Helvetica%2C%20Arial%2C%20sans%2Dserif%3B%0Afont%2Dsize%3A%2014px%3B%0Aline%2Dheight%3A%201%2E35%3B%0A%7D%0A%23TOC%20%7B%0Aclear%3A%20both%3B%0Amargin%3A%200%200%2010px%2010px%3B%0Apadding%3A%204px%3B%0Awidth%3A%20400px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Aborder%2Dradius%3A%205px%3B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Afont%2Dsize%3A%2013px%3B%0Aline%2Dheight%3A%201%2E3%3B%0A%7D%0A%23TOC%20%2Etoctitle%20%7B%0Afont%2Dweight%3A%20bold%3B%0Afont%2Dsize%3A%2015px%3B%0Amargin%2Dleft%3A%205px%3B%0A%7D%0A%23TOC%20ul%20%7B%0Apadding%2Dleft%3A%2040px%3B%0Amargin%2Dleft%3A%20%2D1%2E5em%3B%0Amargin%2Dtop%3A%205px%3B%0Amargin%2Dbottom%3A%205px%3B%0A%7D%0A%23TOC%20ul%20ul%20%7B%0Amargin%2Dleft%3A%20%2D2em%3B%0A%7D%0A%23TOC%20li%20%7B%0Aline%2Dheight%3A%2016px%3B%0A%7D%0Atable%20%7B%0Amargin%3A%201em%20auto%3B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dcolor%3A%20%23DDDDDD%3B%0Aborder%2Dstyle%3A%20outset%3B%0Aborder%2Dcollapse%3A%20collapse%3B%0A%7D%0Atable%20th%20%7B%0Aborder%2Dwidth%3A%202px%3B%0Apadding%3A%205px%3B%0Aborder%2Dstyle%3A%20inset%3B%0A%7D%0Atable%20td%20%7B%0Aborder%2Dwidth%3A%201px%3B%0Aborder%2Dstyle%3A%20inset%3B%0Aline%2Dheight%3A%2018px%3B%0Apadding%3A%205px%205px%3B%0A%7D%0Atable%2C%20table%20th%2C%20table%20td%20%7B%0Aborder%2Dleft%2Dstyle%3A%20none%3B%0Aborder%2Dright%2Dstyle%3A%20none%3B%0A%7D%0Atable%20thead%2C%20table%20tr%2Eeven%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Ap%20%7B%0Amargin%3A%200%2E5em%200%3B%0A%7D%0Ablockquote%20%7B%0Abackground%2Dcolor%3A%20%23f6f6f6%3B%0Apadding%3A%200%2E25em%200%2E75em%3B%0A%7D%0Ahr%20%7B%0Aborder%2Dstyle%3A%20solid%3B%0Aborder%3A%20none%3B%0Aborder%2Dtop%3A%201px%20solid%20%23777%3B%0Amargin%3A%2028px%200%3B%0A%7D%0Adl%20%7B%0Amargin%2Dleft%3A%200%3B%0A%7D%0Adl%20dd%20%7B%0Amargin%2Dbottom%3A%2013px%3B%0Amargin%2Dleft%3A%2013px%3B%0A%7D%0Adl%20dt%20%7B%0Afont%2Dweight%3A%20bold%3B%0A%7D%0Aul%20%7B%0Amargin%2Dtop%3A%200%3B%0A%7D%0Aul%20li%20%7B%0Alist%2Dstyle%3A%20circle%20outside%3B%0A%7D%0Aul%20ul%20%7B%0Amargin%2Dbottom%3A%200%3B%0A%7D%0Apre%2C%20code%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0Aborder%2Dradius%3A%203px%3B%0Acolor%3A%20%23333%3B%0Awhite%2Dspace%3A%20pre%2Dwrap%3B%20%0A%7D%0Apre%20%7B%0Aborder%2Dradius%3A%203px%3B%0Amargin%3A%205px%200px%2010px%200px%3B%0Apadding%3A%2010px%3B%0A%7D%0Apre%3Anot%28%5Bclass%5D%29%20%7B%0Abackground%2Dcolor%3A%20%23f7f7f7%3B%0A%7D%0Acode%20%7B%0Afont%2Dfamily%3A%20Consolas%2C%20Monaco%2C%20%27Courier%20New%27%2C%20monospace%3B%0Afont%2Dsize%3A%2085%25%3B%0A%7D%0Ap%20%3E%20code%2C%20li%20%3E%20code%20%7B%0Apadding%3A%202px%200px%3B%0A%7D%0Adiv%2Efigure%20%7B%0Atext%2Dalign%3A%20center%3B%0A%7D%0Aimg%20%7B%0Abackground%2Dcolor%3A%20%23FFFFFF%3B%0Apadding%3A%202px%3B%0Aborder%3A%201px%20solid%20%23DDDDDD%3B%0Aborder%2Dradius%3A%203px%3B%0Aborder%3A%201px%20solid%20%23CCCCCC%3B%0Amargin%3A%200%205px%3B%0A%7D%0Ah1%20%7B%0Amargin%2Dtop%3A%200%3B%0Afont%2Dsize%3A%2035px%3B%0Aline%2Dheight%3A%2040px%3B%0A%7D%0Ah2%20%7B%0Aborder%2Dbottom%3A%204px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Apadding%2Dbottom%3A%202px%3B%0Afont%2Dsize%3A%20145%25%3B%0A%7D%0Ah3%20%7B%0Aborder%2Dbottom%3A%202px%20solid%20%23f7f7f7%3B%0Apadding%2Dtop%3A%2010px%3B%0Afont%2Dsize%3A%20120%25%3B%0A%7D%0Ah4%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23f7f7f7%3B%0Amargin%2Dleft%3A%208px%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Ah5%2C%20h6%20%7B%0Aborder%2Dbottom%3A%201px%20solid%20%23ccc%3B%0Afont%2Dsize%3A%20105%25%3B%0A%7D%0Aa%20%7B%0Acolor%3A%20%230033dd%3B%0Atext%2Ddecoration%3A%20none%3B%0A%7D%0Aa%3Ahover%20%7B%0Acolor%3A%20%236666ff%3B%20%7D%0Aa%3Avisited%20%7B%0Acolor%3A%20%23800080%3B%20%7D%0Aa%3Avisited%3Ahover%20%7B%0Acolor%3A%20%23BB00BB%3B%20%7D%0Aa%5Bhref%5E%3D%22http%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0Aa%5Bhref%5E%3D%22https%3A%22%5D%20%7B%0Atext%2Ddecoration%3A%20underline%3B%20%7D%0A%0Acode%20%3E%20span%2Ekw%20%7B%20color%3A%20%23555%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Edt%20%7B%20color%3A%20%23902000%3B%20%7D%20%0Acode%20%3E%20span%2Edv%20%7B%20color%3A%20%2340a070%3B%20%7D%20%0Acode%20%3E%20span%2Ebn%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Efl%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Ech%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Est%20%7B%20color%3A%20%23d14%3B%20%7D%20%0Acode%20%3E%20span%2Eco%20%7B%20color%3A%20%23888888%3B%20font%2Dstyle%3A%20italic%3B%20%7D%20%0Acode%20%3E%20span%2Eot%20%7B%20color%3A%20%23007020%3B%20%7D%20%0Acode%20%3E%20span%2Eal%20%7B%20color%3A%20%23ff0000%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Efu%20%7B%20color%3A%20%23900%3B%20font%2Dweight%3A%20bold%3B%20%7D%20%0Acode%20%3E%20span%2Eer%20%7B%20color%3A%20%23a61717%3B%20background%2Dcolor%3A%20%23e3d2d2%3B%20%7D%20%0A" type="text/css" />
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Mapping Regional Data, Mapping Metadata Problems</h1>
+
+
+
+<p>The <a href="https://regions.dataobservatory.eu/">regions</a> package offers tools two work with regional statistics. It is an offspring of the <a href="http://ropengov.github.io/eurostat/">eurostat</a> package of <a href="http://ropengov.org/">rOpenGov</a>, which offers data search, download, manipulation and visualization for Eurostat’s <a href="https://ec.europa.eu/eurostat">European statistics</a>. While you can use <a href="https://regions.dataobservatory.eu/">regions</a> for any European regional statistics, and with a limited functionality, any regional statistics from other parts of the world, this article provides a combined use case for the two packages.</p>
+<p>Eurostat’s main function for data access is <a href="http://ropengov.github.io/eurostat/reference/get_eurostat.html">get_eurostat()</a>, but in this case we will use the more specific <a href="http://ropengov.github.io/eurostat/reference/get_eurostat_json.html">get_eurostat_json</a> to avoid downloading unnecessary aspects of this data product. Let us get a long-established regional dataset, the full-time equivalent (FTE) R&amp;D workforce, in both sexes, in all sectors and all professional positions, and limit our data to two years only:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>regional_rd_personnel <span class="ot">&lt;-</span> eurostat<span class="sc">::</span><span class="fu">get_eurostat_json</span> (</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">id =</span> <span class="st">&quot;rd_p_persreg&quot;</span>, </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">filters =</span> <span class="fu">list</span> (</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">sex =</span> <span class="st">&quot;T&quot;</span>,     </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">prof_pos =</span> <span class="st">&quot;TOTAL&quot;</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">sectperf =</span> <span class="st">&quot;TOTAL&quot;</span>, </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">unit =</span> <span class="st">&quot;FTE&quot;</span> )</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>regional_rd_personnel <span class="ot">&lt;-</span> regional_rd_personnel <span class="sc">%&gt;%</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span> ( .data<span class="sc">$</span>time <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;2009&quot;</span>, <span class="st">&quot;2018&quot;</span>) ) </span></code></pre></div>
+<p>We have saved this filtered datasets as <code>regional_rd_personnel</code>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(<span class="st">&quot;regional_rd_personnel&quot;</span>)</span></code></pre></div>
+<p>We have quiet a few missing cases:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(<span class="fu">is.na</span>(regional_rd_personnel<span class="sc">$</span>values))</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    Mode   FALSE    TRUE </span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; logical     673     283</span></span></code></pre></div>
+<p>But this is not the only problem with the dataset.</p>
+<div id="choropleth-map" class="section level2">
+<h2>Choropleth Map</h2>
+<p>Let us try to place the data on a <code>ggplot2</code> map.</p>
+<p>Let us download a map with <a href="http://ropengov.github.io/eurostat/reference/get_eurostat_geospatial.html">get_eurostat_geospatial</a>. We will use the <code>NUTS2016</code>, i.e., <code>year = 2016</code>, which is the regional boundary definition set in 2016 and used in the period 2018-2020. This is the most used definition in 2021.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>map_nuts_2 <span class="ot">&lt;-</span> eurostat<span class="sc">::</span><span class="fu">get_eurostat_geospatial</span>(</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">resolution =</span> <span class="st">&quot;60&quot;</span>,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">nuts_level =</span> <span class="st">&quot;2&quot;</span>,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">year =</span> <span class="dv">2016</span>)</span></code></pre></div>
+<p>You should always join your data with the geometric information of the regions starting from left with the map:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>indicator_with_map <span class="ot">&lt;-</span> map_nuts_2 <span class="sc">%&gt;%</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span> ( regional_rd_personnel, <span class="at">by =</span> <span class="st">&quot;geo&quot;</span> ) </span></code></pre></div>
+<p>Huge parts of Europe are not covered, but the missing values are not randomly missing. France went under a regional reform; Turkey and Albania did not provide this data earlier. Ireland has no regional statistics available.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>indicator_with_map  <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span> () <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill=</span>values),</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>          <span class="at">color=</span><span class="st">&quot;dim grey&quot;</span>, <span class="at">size=</span>.<span class="dv">1</span>) <span class="sc">+</span> </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_gradient</span>( <span class="at">low =</span><span class="st">&quot;#FAE000&quot;</span>, <span class="at">high =</span> <span class="st">&quot;#00843A&quot;</span>) <span class="sc">+</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span> ( <span class="at">facets =</span> <span class="st">&quot;time&quot;</span>) <span class="sc">+</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;R&amp;D Personnel &amp; Researchers&quot;</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;In all sectors, both sexes by NUTS 2 regions&quot;</span>,</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption=</span><span class="st">&quot;\ua9 EuroGeographics for the administrative boundaries </span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="st">                \ua9 Tutorial and ready-to-use data on economy.dataobservatory.eu&quot;</span>, </span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span> </span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="st">&quot;none&quot;</span>) <span class="sc">+</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">xlim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">22</span>,<span class="dv">48</span>), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">34</span>,<span class="dv">70</span>))</span></code></pre></div>
+</div>
+<div id="missing-values-and-seemingly-missing-values" class="section level2">
+<h2>Missing Values and Seemingly Missing Values</h2>
+<p>Some of these problems are real missing data problems, but some of them are coding problem. In other words, the data is there, but it is not conforming the boundaries that you have on the <code>NUTS2016</code> map. First we need to validate the geographical coding of the dataset. This is the task of <a href="https://regions.dataobservatory.eu/reference/validate_nuts_regions.html">validate_nuts_regions()</a>.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>validated_indicator <span class="ot">&lt;-</span> regions<span class="sc">::</span><span class="fu">validate_nuts_regions</span>(regional_rd_personnel)</span></code></pre></div>
+<p>If we validate the dataset, we will see many interesting metadata observations.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>validation_summary_2016 <span class="ot">&lt;-</span> validated_indicator <span class="sc">%&gt;%</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span> ( .data<span class="sc">$</span>time, .data<span class="sc">$</span>typology) <span class="sc">%&gt;%</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span> ( <span class="at">observations =</span> <span class="fu">n</span>(),</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_missing =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(.data<span class="sc">$</span>values)), </span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_present =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(.data<span class="sc">$</span>values)), </span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>              <span class="at">valid_present =</span> values_present <span class="sc">/</span>observations)</span></code></pre></div>
+<p>Even though the dataset is called <a href="https://appsso.eurostat.ec.europa.eu/nui/show.do?dataset=rd_p_persreg&amp;lang=en">R&amp;D personnel and researchers by sector of performance, sex and NUTS 2 regions <span class="math display">\[rd_p_persreg\]</span></a>, in fact, it contains data on country and <code>NUTS1</code> levels. And it has data on non-EU countries that in 2009 were not part of the NUTS system.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>validation_summary_2016  <span class="sc">%&gt;%</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span> (.data<span class="sc">$</span>time <span class="sc">==</span> <span class="st">&quot;2009&quot;</span>)</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 7 x 6</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   time  typology        observations values_missing values_present valid_present</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;                  &lt;int&gt;          &lt;int&gt;          &lt;int&gt;         &lt;dbl&gt;</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 2009  country                   28              1             27         0.964</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 2009  non_eu_country             7              2              5         0.714</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 2009  non_eu_nuts_le~            7              4              3         0.429</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 2009  non_eu_nuts_le~           10              5              5         0.5  </span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 2009  nuts_level_1             105             14             91         0.867</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 2009  nuts_level_2             265             49            216         0.815</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7 2009  &lt;NA&gt;                      56              3             53         0.946</span></span></code></pre></div>
+<p>The situation is not better in 2018:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>validation_summary_2016  <span class="sc">%&gt;%</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ungroup</span>() <span class="sc">%&gt;%</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span> (.data<span class="sc">$</span>time <span class="sc">==</span> <span class="st">&quot;2018&quot;</span>)</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 7 x 6</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   time  typology        observations values_missing values_present valid_present</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   &lt;chr&gt; &lt;chr&gt;                  &lt;int&gt;          &lt;int&gt;          &lt;int&gt;         &lt;dbl&gt;</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 1 2018  country                   28              0             28         1    </span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 2 2018  non_eu_country             7              1              6         0.857</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 3 2018  non_eu_nuts_le~            7              1              6         0.857</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 4 2018  non_eu_nuts_le~           10              0             10         1    </span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 5 2018  nuts_level_1             105             45             60         0.571</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 6 2018  nuts_level_2             265            113            152         0.574</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 7 2018  &lt;NA&gt;                      56             45             11         0.196</span></span></code></pre></div>
+<p>The dataset is plagued with data that has no place in the <code>NUTS2016</code> boundary definition, and therefore on a <code>NUTS2016</code> map!</p>
+<p>What are the non-conforming bits?</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a> validated_indicator <span class="sc">%&gt;%</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span> ( <span class="sc">!</span> .data<span class="sc">$</span>valid_2016 ) <span class="sc">%&gt;%</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span> ( <span class="fu">all_of</span>(<span class="st">&quot;geo&quot;</span>) ) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  unlist <span class="sc">%&gt;%</span> <span class="fu">as.character</span>()</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   [1] &quot;BA&quot;        &quot;BA&quot;        &quot;CN_X_HK&quot;   &quot;CN_X_HK&quot;   &quot;EA19&quot;      &quot;EA19&quot;     </span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   [7] &quot;EU27_2020&quot; &quot;EU27_2020&quot; &quot;EU28&quot;      &quot;EU28&quot;      &quot;FR2&quot;       &quot;FR2&quot;      </span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [13] &quot;FR21&quot;      &quot;FR21&quot;      &quot;FR22&quot;      &quot;FR22&quot;      &quot;FR23&quot;      &quot;FR23&quot;     </span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [19] &quot;FR24&quot;      &quot;FR24&quot;      &quot;FR25&quot;      &quot;FR25&quot;      &quot;FR26&quot;      &quot;FR26&quot;     </span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [25] &quot;FR3&quot;       &quot;FR3&quot;       &quot;FR30&quot;      &quot;FR30&quot;      &quot;FR4&quot;       &quot;FR4&quot;      </span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [31] &quot;FR41&quot;      &quot;FR41&quot;      &quot;FR42&quot;      &quot;FR42&quot;      &quot;FR43&quot;      &quot;FR43&quot;     </span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [37] &quot;FR5&quot;       &quot;FR5&quot;       &quot;FR51&quot;      &quot;FR51&quot;      &quot;FR52&quot;      &quot;FR52&quot;     </span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [43] &quot;FR53&quot;      &quot;FR53&quot;      &quot;FR6&quot;       &quot;FR6&quot;       &quot;FR61&quot;      &quot;FR61&quot;     </span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [49] &quot;FR62&quot;      &quot;FR62&quot;      &quot;FR63&quot;      &quot;FR63&quot;      &quot;FR7&quot;       &quot;FR7&quot;      </span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [55] &quot;FR71&quot;      &quot;FR71&quot;      &quot;FR72&quot;      &quot;FR72&quot;      &quot;FR8&quot;       &quot;FR8&quot;      </span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [61] &quot;FR81&quot;      &quot;FR81&quot;      &quot;FR82&quot;      &quot;FR82&quot;      &quot;FR83&quot;      &quot;FR83&quot;     </span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [67] &quot;FRA&quot;       &quot;FRA&quot;       &quot;HR02&quot;      &quot;HR02&quot;      &quot;HU10&quot;      &quot;HU10&quot;     </span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [73] &quot;IE01&quot;      &quot;IE01&quot;      &quot;IE02&quot;      &quot;IE02&quot;      &quot;JP&quot;        &quot;JP&quot;       </span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [79] &quot;KR&quot;        &quot;KR&quot;        &quot;LT00&quot;      &quot;LT00&quot;      &quot;NO01&quot;      &quot;NO01&quot;     </span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [85] &quot;NO03&quot;      &quot;NO03&quot;      &quot;NO04&quot;      &quot;NO04&quot;      &quot;NO05&quot;      &quot;NO05&quot;     </span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [91] &quot;PL1&quot;       &quot;PL1&quot;       &quot;PL11&quot;      &quot;PL11&quot;      &quot;PL12&quot;      &quot;PL12&quot;     </span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  [97] &quot;PL3&quot;       &quot;PL3&quot;       &quot;PL31&quot;      &quot;PL31&quot;      &quot;PL32&quot;      &quot;PL32&quot;     </span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [103] &quot;PL33&quot;      &quot;PL33&quot;      &quot;PL34&quot;      &quot;PL34&quot;      &quot;RU&quot;        &quot;RU&quot;       </span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [109] &quot;UKM2&quot;      &quot;UKM2&quot;      &quot;UKM3&quot;      &quot;UKM3&quot;</span></span></code></pre></div>
+<ul>
+<li>Plenty of French units. France went under a regional administrative reform, and we have data about its past, but not in the current boundaries and coding.</li>
+<li>To a lesser extent, we have the same problem with Poland and the UK.</li>
+<li>We have comparative data from Asia on country level, which ended up in a regional dataset.</li>
+<li>We have Norway, which is a member of the EEA, and from 2021 it is officially part of the NUTS2021 system. They were nice to provide their data consistently for the past.</li>
+<li>We have aggregates like the entire EU or the eurozone.</li>
+</ul>
+</div>
+<div id="recoding-and-renaming" class="section level2">
+<h2>Recoding and Renaming</h2>
+<p>The question is, can we save some of the French data? If the boundaries of regions changed, then we cannot: somebody must reaggregate the number of researchers who used to work in the newly defined region back then, before the reform.</p>
+<p>But in some cases, the regional boundaries did not change, only the name and the code of the region, which is the task performed by <a href="https://regions.dataobservatory.eu/reference/recode_nuts.html">recode_nuts()</a>:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>recoded_indicator <span class="ot">&lt;-</span> regional_rd_personnel <span class="sc">%&gt;%</span> </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  regions<span class="sc">::</span><span class="fu">recode_nuts</span>(</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">geo_var =</span> <span class="st">&quot;geo&quot;</span>, <span class="co"># your geograhical ID variable name</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">nuts_year =</span> <span class="dv">2016</span> <span class="co"># change this for other definitions</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    )</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>recoding_summary <span class="ot">&lt;-</span> recoded_indicator <span class="sc">%&gt;%</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span> ( <span class="at">observations  =</span> <span class="fu">nrow</span>(.data)) <span class="sc">%&gt;%</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span> ( <span class="at">typology_change =</span> <span class="fu">ifelse</span> ( <span class="fu">grepl</span>(<span class="st">&quot;Recoded&quot;</span>, .data<span class="sc">$</span>typology_change), </span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">yes =</span> <span class="st">&quot;Recoded&quot;</span>, </span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>                                      <span class="at">no =</span> .data<span class="sc">$</span>typology_change) ) <span class="sc">%&gt;%</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span> ( .data<span class="sc">$</span>typology_change, .data<span class="sc">$</span>time ) <span class="sc">%&gt;%</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span> ( <span class="at">values_missing =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(.data<span class="sc">$</span>values)), </span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_present =</span> <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(.data<span class="sc">$</span>values)), </span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>              <span class="at">pct =</span> values_present <span class="sc">/</span> (values_present <span class="sc">+</span> values_missing ))</span></code></pre></div>
+<p>Let us take a look at the problems identified by <code>regions::recode_nuts()</code>:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>recoding_summary </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 12 x 5</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # Groups:   typology_change [6]</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    typology_change        time  values_missing values_present   pct</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt;                  &lt;chr&gt;          &lt;int&gt;          &lt;int&gt; &lt;dbl&gt;</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 Not found in NUTS      2009               1             11 0.917</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 Not found in NUTS      2018               1             11 0.917</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 Recoded                2009              12             42 0.778</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 Recoded                2018              32             22 0.407</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 Used in NUTS 1999-2013 2009               1              7 0.875</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 Used in NUTS 1999-2013 2018               8              0 0    </span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 Used in NUTS 2006-2013 2009               0              5 1    </span></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 Used in NUTS 2006-2013 2018               5              0 0    </span></span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 Used in NUTS 2021-2021 2009               0              1 1    </span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 Used in NUTS 2021-2021 2018               1              0 0    </span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 11 &lt;NA&gt;                   2009              64            334 0.839</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 12 &lt;NA&gt;                   2018             158            240 0.603</span></span></code></pre></div>
+<ul>
+<li><p>We were able to recode quite a few data points to the <code>NUTS2016</code> definition for the time of observation 2009 as well as 2018. Sometimes we are recoding rows that have missing values, which does not help that much: we know where the data should be, but it is missing anyway. But particularly for the year 2009 we can save plenty of data by recorded the obsolete coding.</p></li>
+<li><p>We identify further problems. We have coding the that was used in various time periods, but there is no clear recoding possibility, because the regions boundaries have changed. To have the history of the data, we would need to recalculate them, say, by adding up the R&amp;D personnel from each settlement in the new regional boundary.</p></li>
+</ul>
+<p>The following non-empty cases were present in the dataset, just not with the coding that we used in the 2018-2020 period (i.e., the <code>NUTS2016</code> coding.) We are able to save 27 observations just by fixing the regional codes!</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>recoded_indicator <span class="sc">%&gt;%</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span> ( .data<span class="sc">$</span>typology <span class="sc">==</span> <span class="st">&quot;nuts_level_2&quot;</span> ) <span class="sc">%&gt;%</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span> ( <span class="sc">!</span><span class="fu">is.na</span>(.data<span class="sc">$</span>typology_change) )  <span class="sc">%&gt;%</span></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span> ( </span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Keep only pairs where we actually save </span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># non-missing observations</span></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>    <span class="sc">!</span><span class="fu">is.na</span>(values) ) <span class="sc">%&gt;%</span></span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">distinct</span> ( .data<span class="sc">$</span>geo, .data<span class="sc">$</span>code_2016 ) <span class="sc">%&gt;%</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span> ( </span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    <span class="co"># We filter out cases of countries who </span></span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>    <span class="co"># joined the NUTS system later</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>    .data<span class="sc">$</span>geo <span class="sc">!=</span> .data<span class="sc">$</span>code_2016 )</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # A tibble: 27 x 2</span></span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    geo   code_2016</span></span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;    &lt;chr&gt; &lt;chr&gt;    </span></span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  1 FR21  FRF2     </span></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  2 FR22  FRE2     </span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  3 FR23  FRD2     </span></span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  4 FR24  FRB0     </span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  5 FR25  FRD1     </span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  6 FR26  FRC1     </span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  7 FR3   FRE1     </span></span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  8 FR30  FRE1     </span></span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  9 FR41  FRF3     </span></span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; 10 FR42  FRF1     </span></span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; # ... with 17 more rows</span></span></code></pre></div>
+<p>So, let us do the trick: change the <code>geo</code> variable to <code>code_2016</code>, which is, whenever there is an equivalent <code>geo</code> code in the <code>NUTS2016</code> definition, the data that you should have. Your original geo variable contains codes that were used, for example, in the <code>NUTS2010</code> or <code>NUTS2013</code> boundary definitions.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>recoded_with_map <span class="ot">&lt;-</span> map_nuts_2 <span class="sc">%&gt;%</span> </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span> ( </span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    recoded_indicator <span class="sc">%&gt;%</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>      <span class="fu">mutate</span> (<span class="at">geo =</span> .data<span class="sc">$</span>code_2016),</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> <span class="st">&quot;geo&quot;</span>  ) </span></code></pre></div>
+<p>Let us make our work visible by creating three observation <code>type</code> variables:</p>
+<ul>
+<li><code>missing</code> which is not present in the dataset;</li>
+<li><code>before</code> which were correctly coded before our recoding;</li>
+<li><code>after</code> which became visible after recoding.</li>
+</ul>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>regional_rd_personnel_recoded <span class="ot">&lt;-</span> recoded_indicator <span class="sc">%&gt;%</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span> ( <span class="at">geo =</span> .data<span class="sc">$</span>code_2016 ) <span class="sc">%&gt;%</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span> ( <span class="at">values_2016 =</span> .data<span class="sc">$</span>values ) <span class="sc">%&gt;%</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span> ( <span class="sc">-</span><span class="fu">all_of</span>(<span class="fu">c</span>(<span class="st">&quot;typology&quot;</span>, <span class="st">&quot;typology_change&quot;</span>, <span class="st">&quot;code_2016&quot;</span>))) <span class="sc">%&gt;%</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">full_join</span> ( </span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>    regional_rd_personnel, </span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">by =</span> <span class="fu">c</span>(<span class="st">&quot;prof_pos&quot;</span>, <span class="st">&quot;sex&quot;</span>, <span class="st">&quot;sectperf&quot;</span>, <span class="st">&quot;unit&quot;</span>, <span class="st">&quot;geo&quot;</span>, <span class="st">&quot;time&quot;</span>)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>             ) <span class="sc">%&gt;%</span></span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span> ( <span class="at">type =</span> <span class="fu">case_when</span> ( </span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>    <span class="fu">is.na</span>(.data<span class="sc">$</span>values_2016) <span class="sc">&amp;</span> <span class="fu">is.na</span>(.data<span class="sc">$</span>values) <span class="sc">~</span> <span class="st">&quot;missing&quot;</span>,</span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">is.na</span>(.data<span class="sc">$</span>values) <span class="sc">~</span> <span class="st">&quot;after&quot;</span>,</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>    <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;before&quot;</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>    ))</span></code></pre></div>
+<p>And let’s place it now on the map:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>map_nuts_2 <span class="sc">%&gt;%</span> </span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span> ( regional_rd_personnel_recoded , <span class="at">by =</span> <span class="st">&quot;geo&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span> ( </span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="co"># remove completely missing cases</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>    <span class="sc">!</span><span class="fu">is.na</span>(.data<span class="sc">$</span>time) ) <span class="sc">%&gt;%</span></span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span> () <span class="sc">+</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_sf</span>(<span class="fu">aes</span>(<span class="at">fill=</span>type),</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>          <span class="at">color=</span><span class="st">&quot;dim grey&quot;</span>, <span class="at">size=</span>.<span class="dv">1</span>) <span class="sc">+</span> </span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span> ( <span class="at">values =</span> <span class="fu">c</span>( <span class="st">&quot;#FAE000&quot;</span>, <span class="st">&quot;#007CBB&quot;</span>, <span class="st">&quot;grey70&quot;</span>) ) <span class="sc">+</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">guides</span>(<span class="at">fill =</span> <span class="fu">guide_legend</span>(<span class="at">reverse=</span>T, <span class="at">title =</span> <span class="cn">NULL</span>)) <span class="sc">+</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span> ( <span class="at">facets =</span> <span class="st">&quot;time&quot;</span>) <span class="sc">+</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title=</span><span class="st">&quot;R&amp;D Personnel &amp; Researchers&quot;</span>,</span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>       <span class="at">subtitle =</span> <span class="st">&quot;In all sectors, both sexes by NUTS 2 regions&quot;</span>,</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>       <span class="at">caption=</span><span class="st">&quot;\ua9 EuroGeographics for the administrative boundaries </span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="st">                \ua9 Daniel Antal, rOpenGov&quot;</span>, </span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="cn">NULL</span>) <span class="sc">+</span></span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_light</span>() <span class="sc">+</span> </span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">legend.position=</span><span class="fu">c</span>(.<span class="dv">93</span>,.<span class="dv">7</span>)) <span class="sc">+</span></span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_sf</span>(<span class="at">xlim=</span><span class="fu">c</span>(<span class="sc">-</span><span class="dv">22</span>,<span class="dv">48</span>), <span class="at">ylim=</span><span class="fu">c</span>(<span class="dv">34</span>,<span class="dv">70</span>))</span></code></pre></div>
+</div>
+<div id="conclusion" class="section level2">
+<h2>Conclusion</h2>
+<p>We did improve our dataset, and this improvement would not have worked with traditional imputation techniques very well. For example, replacing the missing French data with the median value of Europe would have created a huge bias in our dataset.</p>
+<p>This example is a simplification. There are many territorial typologies in use in Europe and globally, but the main takeaway is clear: sub-national boundaries are changing very fast, and you must make sure that you join datasets, or data with a map with the same boundary definitions.</p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -18,7 +18,7 @@
 * Release candidate on CRAN.
 
 # regions 0.1.3 
-* Further improvements in the Google typology: adding the United Kingdom, Portugal, Greece, Malta, parts of Lativa, Italy and Réunion.
+* Further improvements in the Google typology: adding the United Kingdom, Portugal, Greece, Malta, parts of Latvia, Italy and Reunion.
 * `recode_nuts` slightly altered to follow changes in dependency `dplyr`. 
 
 # regions 0.1.4
@@ -26,8 +26,20 @@
 * `validate_country_nuts_countries` is now follows dplyr 1.0, this makes the code more readable.
 * `validate_nuts_regions` is validating non-EU NUTS-like regions as valid if they will be added to `NUTS2021`. These regional codes, while legally not part of the `NUTS2016` typology, are valid and can be placed on the maps created by [EuroGeographics maps provided by Eurostat](https://ec.europa.eu/eurostat/web/gisco/geodata/reference-data/administrative-units-statistical-units/nuts).
 * Italy, Portugal, the United Kingdom, Estonia, Slovenia,Latvia pseudo-NUTS3 codes in `google_nuts_matchtable`.
-* New correspondence table for converstion between Local Administration Units (LAUs) and NUTS within the European Union and some other European countries.
+* New correspondence table for conversion between Local Administration Units (LAUs) and NUTS within the European Union and some other European countries.
 
 # regions 0.1.5
 * Correction of a small bug with input data frames that already have columns that the validation result should contain. 
 * Wordlist added for spell checking with geographical exceptions.
+
+# regions 0.1.6
+* Exception handling partly moved to assertthat.
+* New test_geo_code of for performance enhancement. 
+* Changing non-standard evaluation to dplyr 1.0+
+* Master repo moving to [rOpenGov](http://ropengov.org/).
+* Rewritten README.
+
+# regions 0.1.7
+* Added the `regional_rd_personnel` dataset and the `Maping Regional Data, Maping Metadata Problems` vignette.
+* A new function, `validate_parameters()` takes over several parameter validations. The aim of this function is to provide consistent error messages, and thorough validation of function parameters whenever they must conform to a closed vocabulary or parameter range.
+* This is a release candidate on CRAN.

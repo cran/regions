@@ -14,12 +14,18 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup, message=FALSE}
+```{r backrgoundsetup, message=FALSE, warning=FALSE, echo=FALSE}
+devtools::load_all()
+library(dplyr)
+```
+
+```{r setup, message=FALSE, eval=FALSE}
 library(regions)
 library(dplyr)
 ```
 
 Most economic, social, and environmental situations and developments have a specific territorial dimension. When a statistic is computed to describe a population parameter, the computation is often carried out for a population within the boundaries of this territory.
+ 
 Probably the most widely used and cited statistics are defined within the scope of national boundaries.  The population of France relates to the counting of people living within the boundaries of France (unless we specifically count French citizens living outside these boundaries.)
 
 Most national boundaries are stable, often throughout centuries.  The number of national boundaries is approaching 200, which means that global datasets have boundary changes almost every year _somewhere_.  Just the current European Union has witnessed several such changes in the last decades with the unification of Germany, the breakup of current member states Czechia and Slovakia, and the breakup of the former Yugoslavia to several current and prospective member states. When we are working with long-term data panels, obviously we have to make sure that we are comparing Czechia, Slovakia correctly with Czechoslovakia.
@@ -52,7 +58,8 @@ A typical workflow is this:
 
 When you are working with individual data, you are omitting steps 2-4. When working with national data, especially with small datasets, we can often  join data tables by a country name or country code without the problems of 2-4, but even in these cases, imputation rules like using the median value for missing cases is obviously wrong.  If the missing value represents a very small member state like Malta, which has a total population smaller than most capital cities in Europe, then using a median or mean country value will very much overestimate a count data for Malta.
 
-There are two main international efforts are taking place to standardize sub-national statistics: on the level of the European Union and on the level of the OECD.  Our programmatic solution aims to work with both international data sources, and as much as possible, with any country's data that uses the `ISO-3166-2` standard. However, at this stage we have only included the typology used by the European Union in helper functions and metadata (typological vocabulary) files.  
+There are two main international efforts are taking place to standardize sub-national statistics: on the level of the European Union and on the level of the OECD.  Our programmatic solution aims to work with both international data sources, and as much as possible, with any country's data that uses the `ISO-3166-2` standard. However, at this stage we have only included the typology used by the European Union in helper functions and metadata (typological vocabulary) files.
+
 ## Using a Consistent Typology
 
 The European Union harmonises the national statistical systems of 27 members states, 4 EEA countries and several other potential member states.  Its regional typology, the hierarchical NUTS system is the most complex international system, and the regions package is mainly developed to help working with European regional data.  However, the tasks related to such regional typologies are not unique the European Union.  They are present in almost any national statistical system, and they can be similarly complex in federal states like the United States or Australia.
@@ -85,7 +92,7 @@ Eurostat offers so-called correspondence tables to follow boundary changes, reco
 
 The `data-raw` library contains these Excel tables and very long data wrangling code that unifies the relevant vocabulary of these Excel files and brings the tables into a single, tidy format , starting with the definition `NUTS1999`.  The resulting data file `nuts_changes` is included in the `regions` package. It already contains the changes that will come into force in 2021.
 
-The vignette [Validating Your Typology](http://regions.danielantal.eu/articles/validation.html) gives a real-life example to the use of these functions. Validations are the starting points for [Recoding and re-labelling](#recoding), [Aggregation And Re-Aggregation ](#aggregation) and [Disaggregation And Projection](#projection) operations.
+The vignette [Validating Your Typology](https://regions.dataobservatory.eu/articles/validation.html) gives a real-life example to the use of these functions. Validations are the starting points for [Recoding and re-labelling](#recoding), [Aggregation And Re-Aggregation ](#aggregation) and [Disaggregation And Projection](#projection) operations.
 
 ### Recoding and re-labelling {#recoding}
 
@@ -119,7 +126,7 @@ knitr::kable(
 
 This is in fact a simpler recoding than the earlier example of _Budapest_. _La Réunion_ did change its name and code, so you find its data under different labels, but it is still within the `NUTS2` typology.  Its comparators are likely to be found in the same statistical table. In the case of _Budapest_, the name did not change, but the change of the geo label reflects the fact that Budapest was moved from the `NUTS3` typology to the `NUTS2` typology, because it can be much better compared with `NUTS2` regions. For data concerning the time period before 2017, you need to look for data about Budapest in datasets that follow the `NUTS3` typology, or in national data sources, but you can fill in these historical data to pre-2017 cells of your `NUTS2` regional data. The size of Budapest did not change that much - it should have been compared with `NUTS2` regions in 2014, like in 2020, and not with smaller `NUTS3` units.
 
-See in more detail the vignette [Recoding & Relabelling](http://regions.danielantal.eu/articles/recode.html) for our programmatic solution.
+See in more detail the vignette [Recoding & Relabelling](https://regions.dataobservatory.eu/articles/recode.html) for our programmatic solution.
 
 ## Imputation
 
@@ -142,15 +149,16 @@ So, what are our possibilities if we have only country-level `MT`data, but we wo
 ```{r}
 data("mixed_nuts_example")
 mixed_nuts_example %>%
-  filter ( substr(geo,1,2) == "MT") %>%
-  knitr::kable ()
+  dplyr::filter(substr(geo,1,2) == "MT") %>%
+  knitr::kable()
 ```
 
 Malta offers two technical imputation slots on `NUTS1` level, `MT0` for territorially attributed data, and `MTZ` for non-territorial exceptions.  On NUTS2 level, `MT00` and `MTZZ`.  And at last, what is a real imputation, you can impute the `MT` = `MT0` = `MT00` values to `MT001`, should you have only data for `MT002`, etc.  (In this simple example, we impute the `MT` values to both subdivisions, `MT001` and `MT002`.)
 
 ```{r}
-impute_down_nuts (mixed_nuts_example) %>%
-  filter ( substr(geo,1,2) == "MT") %>%
+data("mixed_nuts_example")
+impute_down_nuts(mixed_nuts_example) %>%
+  dplyr::filter(substr(geo,1,2) == "MT") %>%
   knitr::kable ()
 ```
 

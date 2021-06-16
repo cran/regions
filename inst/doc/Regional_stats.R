@@ -4,9 +4,13 @@ knitr::opts_chunk$set(
   comment = "#>"
 )
 
-## ----setup, message=FALSE-----------------------------------------------------
-library(regions)
+## ----backrgoundsetup, message=FALSE, warning=FALSE, echo=FALSE----------------
+devtools::load_all()
 library(dplyr)
+
+## ----setup, message=FALSE, eval=FALSE-----------------------------------------
+#  library(regions)
+#  library(dplyr)
 
 ## ----fr-----------------------------------------------------------------------
 data(nuts_changes)
@@ -22,12 +26,13 @@ knitr::kable(
 ## -----------------------------------------------------------------------------
 data("mixed_nuts_example")
 mixed_nuts_example %>%
-  filter ( substr(geo,1,2) == "MT") %>%
-  knitr::kable ()
+  dplyr::filter(substr(geo,1,2) == "MT") %>%
+  knitr::kable()
 
 ## -----------------------------------------------------------------------------
-impute_down_nuts (mixed_nuts_example) %>%
-  filter ( substr(geo,1,2) == "MT") %>%
+data("mixed_nuts_example")
+impute_down_nuts(mixed_nuts_example) %>%
+  dplyr::filter(substr(geo,1,2) == "MT") %>%
   knitr::kable ()
 
 ## ----southern-----------------------------------------------------------------
