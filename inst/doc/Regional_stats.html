@@ -408,6 +408,67 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The Online Browsing Platform (OBP) of the International Organization for Standardization contains all coding information, and metadata about recent changes for each country. (See, for example: <a href="https://www.iso.org/obp/ui/#iso:code:3166:NL">ISO 3166 — Codes for the representation of names of countries and their subdivisions: NL - Netherlands (the)</a>)</p>
 <p>It would be tempting to use <code>ISO-3166-2</code> definitions for sub-national boundaries, however, the <code>ISO-3166-2</code> itself is changing relatively often, and in time series or panel data we can only refer to a certain version of the <code>ISO-3166-2</code>. All the boundary definitions are valid for a certain time period and certain boundaries. We currently incorporated only European metadata for the last 20 years, and we are planning to continue with OECD metadata in the forthcoming releases. However, we are welcoming any pull requests for other countries or country-groups.</p>
 </div>
+<div id="citations-and-related-work" class="section level1">
+<h1>Citations and related work</h1>
+<div id="citing-the-data-sources" class="section level3">
+<h3>Citing the data sources</h3>
+<p>Eurostat data: cite <a href="https://ec.europa.eu/eurostat/">Eurostat</a>.</p>
+<p>Administrative boundaries: cite <a href="https://ec.europa.eu/eurostat/web/gisco/geodata/reference-data/administrative-units-statistical-units">EuroGeographics</a>.</p>
+</div>
+<div id="citing-the-eurostat-r-package" class="section level3">
+<h3>Citing the eurostat R package</h3>
+<p>For main developers and contributors, see the <a href="https://ropengov.github.io/eurostat/">package homepage</a>.</p>
+<p>This work can be freely used, modified and distributed under the BSD-2-clause (modified FreeBSD) license:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">citation</span>(<span class="st">&quot;eurostat&quot;</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Kindly cite the eurostat R package as follows:</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   (C) Leo Lahti, Janne Huovari, Markus Kainu, Przemyslaw Biecek.</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Retrieval and analysis of Eurostat open data with the eurostat</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   package. R Journal 9(1):385-392, 2017. Version 3.7.5 Package URL:</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   http://ropengov.github.io/eurostat Manuscript URL:</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   https://journal.r-project.org/archive/2017/RJ-2017-019/index.html</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; A BibTeX entry for LaTeX users is</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   @Misc{,</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     title = {eurostat R package},</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     author = {Leo Lahti and Janne Huovari and Markus Kainu and Przemyslaw Biecek},</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     journal = {R Journal},</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     volume = {9},</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     number = {1},</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     pages = {385-392},</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     year = {2017},</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     url = {https://journal.r-project.org/archive/2017/RJ-2017-019/index.html},</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     note = {Version 3.7.5},</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   }</span></span></code></pre></div>
+</div>
+<div id="citing-the-regions-r-package" class="section level3">
+<h3>Citing the regions R package</h3>
+<p>For main developer and contributors, see the <a href="https://regions.dataobservatory.eu/">package homepage</a>.</p>
+<p>This work can be freely used, modified and distributed under the GPL-3 license:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">citation</span>(<span class="st">&quot;regions&quot;</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; To cite package &#39;regions&#39; in publications use:</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Daniel Antal (2021). regions: Processing Regional Statistics. R</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   package version 0.1.8. https://regions.dataobservatory.eu/</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; A BibTeX entry for LaTeX users is</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   @Manual{,</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     title = {regions: Processing Regional Statistics},</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     author = {Daniel Antal},</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     year = {2021},</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     note = {R package version 0.1.8},</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     url = {https://regions.dataobservatory.eu/},</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   }</span></span></code></pre></div>
+</div>
+<div id="contact" class="section level3">
+<h3>Contact</h3>
+<p>For contact information, see the package homepages.</p>
+</div>
+</div>
 
 
 

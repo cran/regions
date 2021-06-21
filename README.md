@@ -10,21 +10,17 @@ coverage](https://codecov.io/gh/antaldaniel/regions/branch/master/graph/badge.sv
 [![Project Status: WIP – Initial development is in progress, but there
 has not yet been a stable, usable release suitable for the
 public.](https://www.repostatus.org/badges/latest/wip.svg)](https://www.repostatus.org/#wip)
-“[![license](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)”
-“[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/regions)](https://cran.r-project.org/package=regions)”
-“[![CRAN\_Status\_Badge\_version\_last\_release](https://www.r-pkg.org/badges/version-last-release/regions)](https://cran.r-project.org/package=regions)”
-“[![metacran
-downloads](https://cranlogs.r-pkg.org/badges/regions)](https://cran.r-project.org/package=regions)”
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4935674.svg)](https://doi.org/10.5281/zenodo.4935674)
+[![license](https://img.shields.io/badge/license-GPL--3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0.en.html)
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/regions)](https://cran.r-project.org/package=regions)
+[![CRAN\_Status\_Badge\_version\_last\_release](https://www.r-pkg.org/badges/version-last-release/regions)](https://cran.r-project.org/package=regions)"
+[![metacran
+downloads](https://cranlogs.r-pkg.org/badges/regions)](https://cran.r-project.org/package=regions)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4965909.svg)](https://doi.org/10.5281/zenodo.4965909)
 [![Follow
 rOpenGov](https://img.shields.io/twitter/follow/ropengov.svg?style=social)](https://twitter.com/intent/follow?screen_name=ropengov)
 [![Follow
 author](https://img.shields.io/twitter/follow/antaldaniel.svg?style=social)](https://twitter.com/intent/follow?screen_name=antaldaniel)
 [![R-CMD-check](https://github.com/rOpenGov/regions/workflows/R-CMD-check/badge.svg)](https://github.com/rOpenGov/regions/actions)
-[![Follow
-rOpenGov](https://img.shields.io/twitter/follow/ropengov.svg?style=social)](https://twitter.com/intent/follow?screen_name=ropengov)
-[![Follow
-author](https://img.shields.io/twitter/follow/antaldaniel.svg?style=social)](https://twitter.com/intent/follow?screen_name=antaldaniel)
 <!-- badges: end -->
 
 ## Installation
@@ -50,7 +46,7 @@ if you agree with the [Contributor Code of
 Conduct](https://contributor-covenant.org/version/2/0/CODE_OF_CONDUCT.html)
 
 If you use `regions` in your work, please [cite the
-package](https://doi.org/10.5281/zenodo.4935674).
+package](https://doi.org/10.5281/zenodo.4965909).
 
 ## Working with Sub-national Statistics
 
@@ -65,14 +61,36 @@ of the aggregation level and high number of observations can allow more
 precise control of model parameters and errors, and the number of
 observations grows from 20 to 200-300.
 
+<div class="figure" style="text-align: center">
+
+<img src="C:/_packages/regions/vignettes/indicator_with_map.png" alt="The change from national to sub-national level comes with a huge data processing price: internal administrative boundaries, their names, codes codes change very frequently." width="80%" />
+<p class="caption">
+The change from national to sub-national level comes with a huge data
+processing price: internal administrative boundaries, their names, codes
+codes change very frequently.
+</p>
+
+</div>
+
 Yet the change from national to sub-national level comes with a huge
 data processing price. While national boundaries are relatively stable,
 with only a handful of changes in each recent decade. The change of
 national boundaries requires a more-or-less global consensus. But states
 are free to change their internal administrative boundaries, and they do
 it with large frequency. This means that the names, identification codes
-and boundaries of regions change very frequently. Joining data from
-different sources and different years can be very difficult.
+and boundary definitions of sub-national regions change very frequently.
+Joining data from different sources and different years can be very
+difficult.
+
+<div class="figure" style="text-align: center">
+
+<img src="C:/_packages/regions/vignettes/recoded_indicator_with_map.png" alt="Our regions R package helps the data processing, validation and imputation of sub-national, regional datasets and their coding." width="80%" />
+<p class="caption">
+Our regions R package helps the data processing, validation and
+imputation of sub-national, regional datasets and their coding.
+</p>
+
+</div>
 
 There are numerous advantages of switching from a national level of the
 analysis to a sub-national level comes with a huge price in data
@@ -123,12 +141,12 @@ recode_nuts(dat = example_df,
 
 | geo   |    values | code\_2013 |
 |:------|----------:|:-----------|
-| FR    | 32.559077 | FR         |
-| UKI3  | 56.672710 | UKI3       |
-| DED   | 87.818697 | DED        |
-| FRK   | 29.071375 | FR7        |
-| HU12  |  2.817158 | NA         |
-| DEE32 |  6.149496 | NA         |
+| FR    | 25.502412 | FR         |
+| UKI3  |  2.070591 | UKI3       |
+| DED   | 40.306681 | DED        |
+| FRK   | 42.378169 | FR7        |
+| HU12  | 48.944542 | NA         |
+| DEE32 | 98.442229 | NA         |
 
 **Hierarchical aggregation and special imputation**: missingness is very
 frequent in sub-national statistics, because they are created with a
@@ -203,8 +221,16 @@ knitr::kable(imputed)
     again, for example from `NUTS1` to `NUTS2` or from `ISO-3166-1` to
     `ISO-3166-2` (disaggregate; under development)
 
+We started building an experimental APIs data is running regions
+regularly and improving known statistical data sources. See: [Digital
+Music Observatory](https://music.dataobservatory.eu/), [Green Deal Data
+Observatory](https://greendeal.dataobservatory.eu/), [Economy Data
+Observatory](https://economy.dataobservatory.eu/).
+
 ## Vignettes / Articles
 
+-   [Mapping Regional Data, Mapping Metadata
+    Problem](https://regions.dataobservatory.eu/articles/mapping.html)
 -   [Working With Regional, Sub-National Statistical
     Products](https://regions.dataobservatory.eu/articles/Regional_stats.html)
 -   [Validating Your

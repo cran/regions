@@ -1,6 +1,7 @@
 Package: regions
 Title: Processing Regional Statistics
-Version: 0.1.7
+Version: 0.1.8
+Date: 2021-06-19
 Authors@R: 
     c(
   person(given = "Daniel",
@@ -41,11 +42,11 @@ Suggests: knitr, testthat, rmarkdown, covr, spelling, devtools,
         eurostat, ggplot2
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2021-06-16 09:31:06 UTC; Daniel Antal
+Packaged: 2021-06-21 10:13:45 UTC; Daniel Antal
 Author: Daniel Antal [aut, cre] (<https://orcid.org/0000-0001-7513-6760>),
   Kasia Kulma [ctb] (<https://orcid.org/0000-0002-2952-9720>),
   Istvan Zsoldos [ctb] (<https://orcid.org/0000-0001-5712-2103>),
   Leo Lahti [ctb] (<https://orcid.org/0000-0001-5537-637X>)
 Maintainer: Daniel Antal <daniel.antal@ceemid.eu>
 Repository: CRAN
-Date/Publication: 2021-06-16 10:20:02 UTC
+Date/Publication: 2021-06-21 11:20:01 UTC

@@ -17,7 +17,7 @@ data(daily_internet_users)
 #  daily_internet_users <- isoc_r_iuse_i  %>%
 #    dplyr::filter ( unit == "PC_IND",          # percentage of individuals
 #                    indic_is == "I_IDAY") %>%  # daily internet users
-#    select (geo, time, values )
+#    select ( all_of(c("geo", "time", "values") )
 
 ## ----testvalidate-------------------------------------------------------------
 test <- daily_internet_users  %>% 
@@ -25,9 +25,9 @@ test <- daily_internet_users  %>%
   dplyr::filter ( time %in% c(2012, 2018),
                   country_code %in% c("FR", "HU", "LT")) %>%
   mutate ( time = paste0("Y", time )) %>%
-  pivot_wider (., names_from ="time", values_from = "values") %>%
+  pivot_wider ( names_from ="time", values_from = "values") %>%
   validate_nuts_regions() %>%  # default year the current valid 2016
-  validate_nuts_regions(.,  nuts_year = 2010 )
+  validate_nuts_regions( nuts_year = 2010 )
 
 ## ----new----------------------------------------------------------------------
 # only first 10 regions are printed
@@ -39,4 +39,7 @@ knitr::kable(
 knitr::kable(
   test [ ! test$valid_2016, ]
 )
+
+## ----citation-regions, message=FALSE, eval=TRUE, echo=TRUE--------------------
+citation("regions")
 

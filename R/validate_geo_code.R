@@ -34,7 +34,7 @@
 #' @return A character list with the valid typology, or 'invalid' in the cases
 #' when the geo coding is not valid.
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' my_reg_data <- data.frame (
 #'   geo = c("BE1", "HU102", "FR1",
 #'           "DED", "FR7", "TR", "DED2",
@@ -46,7 +46,9 @@
 #' @export
 
 validate_geo_code <- function (geo, nuts_year = 2016) {
-  all_valid_nuts_codes <- NULL
+  
+  ## These will be loaded into the function environment:
+  all_valid_nuts_codes <- nuts_exceptions <- NULL
   
   assertthat::assert_that(any (c("character", "factor") %in% class(geo)),
                           msg = "geo must be a character or factor vector.")
@@ -62,26 +64,16 @@ validate_geo_code <- function (geo, nuts_year = 2016) {
                package = "regions",
                envir = environment())
   
-  exceptions <- all_valid_nuts_codes %>%
-    mutate (country_code = get_country_code(geo          = .data$geo,
-                                            typology     = "NUTS")) %>%
-    filter (.data$country_code %in% c("IS", "LI", "NO", "AL",
-                                      "CH", "MK", "RS", "TR",
-                                      "ME"))  %>%
-    distinct (.data$geo, .data$typology) %>%
-    mutate (typology = glue::glue ("non_eu_{typology}")) %>%
-    select (all_of(c("geo", "typology"))) %>%
-    bind_rows (tibble (
-      geo = c("GB", "GR", "XK"),
-      typology = c(rep("iso_country", 2), "non_eu_country")
-    ))
+  utils::data (nuts_exceptions,
+               package = "regions",
+               envir = environment())
   
   filtering <- grepl(as.character(nuts_year),
                      all_valid_nuts_codes$nuts)
   
   filtered_nuts_data_frame <- all_valid_nuts_codes[filtering,] %>%
     select (all_of(c("geo", "typology"))) %>%
-    full_join (exceptions,
+    full_join (nuts_exceptions,
                by = c("geo", "typology"))
   
   tibble::tibble (geo = geo) %>%

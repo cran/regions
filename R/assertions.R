@@ -1,3 +1,62 @@
+#' Validate Parameter 'dat'
+#' @importFrom assertthat assert_that
+#' @param dat A data frame input to be validated.
+#' @param values_var The variable that contains the upstream data to be
+#' imputed to the downstream data, defaults to \code{"values"}.
+#' @param geo_var The variable that contains the geographical codes in the
+#' NUTS typologies, defaults to code{"geo_var".}
+#' @param method_var The variable that contains the metadata on various
+#' processing information, defaults to \code{NULL} in which case it will
+#' be returned as \code{'method'}.
+#' @param nuts_year The year of the NUTS typology to use.
+#' @return A logical variable showing if all assertions were met.
+#' @keywords internal
+
+validate_data_frame <- function(dat, 
+                                geo_var = NULL, 
+                                nuts_year = NULL, 
+                                values_var = NULL, 
+                                method_var = NULL) {
+  
+  assertthat::assert_that(
+    "data.frame" %in% class(dat), 
+    msg = "The parameter 'dat' must be a data.frame-like object, like a data frame or a tibble."
+  )
+  
+  assertthat::assert_that (
+    nrow(dat) > 0, 
+    msg = "The data frame has no observations."
+  )
+  
+  if (!is.null(geo_var)) {
+    assertthat::assert_that(
+      geo_var %in% names(dat), 
+      msg = glue::glue ("geo_var={geo_var} is not among names(dat)")
+    )
+  }
+  
+  if (!is.null(values_var)) {
+    assertthat::assert_that(
+      values_var %in% names(dat), 
+      msg = glue::glue ("values_var={values_var} is not among names(dat)")
+    )
+  }
+  
+  if (!is.null(method_var)) {
+    assertthat::assert_that(
+      method_var %in% names(dat), 
+      msg = glue::glue ("method_var={method_var} is not among names(dat)")
+    )
+  }
+  
+  if (!is.null(nuts_year)) {
+    assertthat::assert_that(
+      nuts_year %in% c(1999, 2003, 2006, 2010, 2013, 2016, 2021),
+      msg = glue::glue ("nuts_year={nuts_year} is an invalid parameter setting.")
+    )
+  }
+}
+
 #' Assertion for Correct Function Calls
 #'
 #' Assertions are made to give early and precise error messages for wrong
@@ -19,8 +78,9 @@
 #' country codes.
 #' @importFrom assertthat assert_that
 #' @importFrom glue glue
-#' @return A boolean if the parameter matches the Spotify Web API parameter range.
+#' @return A boolean, logical variable if the parameter calls are valid.
 #' @export
+
 validate_parameters <- function(typology = NULL, 
                                 param = NULL, 
                                 param_name = NULL) {
@@ -39,7 +99,7 @@ validate_parameters <- function(typology = NULL,
 #' meaningful error message.
 #'
 #' @inheritParams validate_parameters
-#' @return A boolean if the parameter matches the Spotify Web API parameter range.
+#' @return A boolean, logical variable if the mandatory parameter is present.
 #' @keywords internal
 validate_param <- function (param, param_name ) {
   
@@ -53,7 +113,7 @@ validate_param <- function (param, param_name ) {
 #' Validate typology Parameter
 #' 
 #' @inheritParams validate_parameters
-#' @return A boolean if the parameter matches the Spotify Web API parameter range.
+#' @return A boolean, logical variable if the typology in question exists, the typology parameter is valid.
 #' @keywords internal
 validate_typology <- function (typology) {
   assertthat::assert_that(

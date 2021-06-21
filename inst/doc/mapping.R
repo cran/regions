@@ -62,7 +62,7 @@ library(ggplot2)
 #    theme(legend.position="none") +
 #    coord_sf(xlim=c(-22,48), ylim=c(34,70))
 
-## ----original-map, include=FALSE, out.width='80%', fig.align='center'---------
+## ----original-map, echo=FALSE, out.width='80%', fig.align='center'------------
 knitr::include_graphics(
   here::here("vignettes", "indicator_with_map.png")
 )
@@ -173,8 +173,17 @@ regional_rd_personnel_recoded <- recoded_indicator %>%
 #    theme(legend.position=c(.93,.7)) +
 #    coord_sf(xlim=c(-22,48), ylim=c(34,70))
 
-## ----recoded-map, include=FALSE, out.width='80%', fig.align='center'----------
+## ----recoded-map, echo=FALSE, out.width='80%', fig.align='center'-------------
 knitr::include_graphics(
   here::here("vignettes", "recoded_indicator_with_map.png")
 )
+
+## ----citation-eurostat, message=FALSE, eval=TRUE, echo=TRUE-------------------
+citation("eurostat")
+
+## ----citation-regions, message=FALSE, eval=TRUE, echo=TRUE--------------------
+citation("regions")
+
+## ----sessioninfo, message=FALSE, warning=FALSE--------------------------------
+sessionInfo()
 

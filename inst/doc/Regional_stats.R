@@ -43,3 +43,9 @@ knitr::kable(
   southern[, c("code_2013", "code_2016", "geo_name_2016", "change_2016")]
   )
 
+## ----citation-eurostat, message=FALSE, eval=TRUE, echo=TRUE-------------------
+citation("eurostat")
+
+## ----citation-regions, message=FALSE, eval=TRUE, echo=TRUE--------------------
+citation("regions")
+

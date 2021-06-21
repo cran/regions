@@ -72,3 +72,6 @@ nuts_changes %>%
   filter( complete.cases(.) ) %>%
   knitr::kable()
 
+## ----citation-regions, message=FALSE, eval=TRUE, echo=TRUE--------------------
+citation("regions")
+

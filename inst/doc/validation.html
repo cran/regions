@@ -148,7 +148,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>daily_internet_users <span class="ot">&lt;-</span> isoc_r_iuse_i  <span class="sc">%&gt;%</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span> ( unit <span class="sc">==</span> <span class="st">&quot;PC_IND&quot;</span>,          <span class="co"># percentage of individuals</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>                  indic_is <span class="sc">==</span> <span class="st">&quot;I_IDAY&quot;</span>) <span class="sc">%&gt;%</span>  <span class="co"># daily internet users</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span> (geo, time, values )</span></code></pre></div>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span> ( <span class="fu">all_of</span>(<span class="fu">c</span>(<span class="st">&quot;geo&quot;</span>, <span class="st">&quot;time&quot;</span>, <span class="st">&quot;values&quot;</span>) )</span></code></pre></div>
 <p>Simply downloading a regional statistics from the Eurostat data warehouse and placing the observation on the same map does not work. If you look into the data, you may realize that the geo codes of French, Lithuanian or Hungarian regions, to name a few, do not match in the years 2012 and 2018.</p>
 <p>Let’s have a look at these countries in two years, using the helper function <code>get_country_code</code>. The year 2012 is coded with the <code>NUTS2010</code> typology and the year 2018 with the <code>NUTS2016</code> typology. Then we use the <code>valideate_nuts_region</code> function with the default <code>NUTS2016</code> (which is currently valid in the European Union) and the obsolete <code>NUTS2010</code> definitions.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>test <span class="ot">&lt;-</span> daily_internet_users  <span class="sc">%&gt;%</span> </span>
@@ -156,9 +156,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span> ( time <span class="sc">%in%</span> <span class="fu">c</span>(<span class="dv">2012</span>, <span class="dv">2018</span>),</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                  country_code <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">&quot;FR&quot;</span>, <span class="st">&quot;HU&quot;</span>, <span class="st">&quot;LT&quot;</span>)) <span class="sc">%&gt;%</span></span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span> ( <span class="at">time =</span> <span class="fu">paste0</span>(<span class="st">&quot;Y&quot;</span>, time )) <span class="sc">%&gt;%</span></span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span> (., <span class="at">names_from =</span><span class="st">&quot;time&quot;</span>, <span class="at">values_from =</span> <span class="st">&quot;values&quot;</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span> ( <span class="at">names_from =</span><span class="st">&quot;time&quot;</span>, <span class="at">values_from =</span> <span class="st">&quot;values&quot;</span>) <span class="sc">%&gt;%</span></span>
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">validate_nuts_regions</span>() <span class="sc">%&gt;%</span>  <span class="co"># default year the current valid 2016</span></span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">validate_nuts_regions</span>(.,  <span class="at">nuts_year =</span> <span class="dv">2010</span> )</span></code></pre></div>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">validate_nuts_regions</span>( <span class="at">nuts_year =</span> <span class="dv">2010</span> )</span></code></pre></div>
 <p>The following NUTS regions codes are not valid in the 2010 definition. These sub-national divisions were defined in 2013 or 2016. Some of these regional boundaries did not change, but got new codes after altering the administrative divisions of France. Some of the seemingly missing 2012 data can be found under different codes.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># only first 10 regions are printed</span></span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span><span class="fu">kable</span>( </span>
@@ -321,6 +321,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </tbody>
 </table>
 <p>Especially in the case of Budapest and Central Hungary, the comparative data can be produced for different boundary definitions, because the boundary change was simple. (Budapest was removed from Central Hungary.) In Lithuania, the change was not more complex, but unfortunately it cut through a far less rarely used typology level, <code>NUTS3</code>. While the change is simple, the replacement data is usually not published.</p>
+<div id="citations-and-related-work" class="section level1">
+<h1>Citations and related work</h1>
+<div id="citing-the-data-sources" class="section level3">
+<h3>Citing the data sources</h3>
+<p>Eurostat data: cite <a href="https://ec.europa.eu/eurostat/">Eurostat</a>.</p>
+<p>Administrative boundaries: cite <a href="https://ec.europa.eu/eurostat/web/gisco/geodata/reference-data/administrative-units-statistical-units">EuroGeographics</a>.</p>
+</div>
+<div id="citing-the-regions-r-package" class="section level3">
+<h3>Citing the regions R package</h3>
+<p>For main developer and contributors, see the <a href="https://regions.dataobservatory.eu/">package homepage</a>.</p>
+<p>This work can be freely used, modified and distributed under the GPL-3 license:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">citation</span>(<span class="st">&quot;regions&quot;</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; To cite package &#39;regions&#39; in publications use:</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Daniel Antal (2021). regions: Processing Regional Statistics. R</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   package version 0.1.8. https://regions.dataobservatory.eu/</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; A BibTeX entry for LaTeX users is</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   @Manual{,</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     title = {regions: Processing Regional Statistics},</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     author = {Daniel Antal},</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     year = {2021},</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     note = {R package version 0.1.8},</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     url = {https://regions.dataobservatory.eu/},</span></span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   }</span></span></code></pre></div>
+</div>
+<div id="contact" class="section level3">
+<h3>Contact</h3>
+<p>For contact information, see the <a href="https://regions.dataobservatory.eu/">package homepage</a>.</p>
+</div>
+</div>
 
 
 
